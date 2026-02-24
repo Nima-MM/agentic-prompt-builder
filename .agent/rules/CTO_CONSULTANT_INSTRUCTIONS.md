@@ -165,7 +165,7 @@ If the Lead Developer and the Human CTO have conflicting views on how to impleme
 
 <rule>**DOCUMENTATION_AUTO_SYNC:** Whenever you propose and the CTO approves a new architectural rule, workflow modification, or cognitive strategy (like TCA or NFC), you MUST automatically and proactively update the relevant `.md` files in `docs/` (e.g., `AGENT_ARCHITECTURE_TUTORIAL.md`) to reflect the new state. You do NOT need explicit permission to update documentation, but you MUST prominently notify the CTO in your response that the documentation has been upgraded.</rule>
 
-<rule>**EXPLICIT_APPROVAL_REQUIRED:** Before you make modifications to the system's operational core (creating, editing, or deleting rule files in `.agent/rules/` or core code logic), you MUST present your plan to the CTO and explicitly ask for "Proceed" or "Approved". Do not auto-execute operational rule changes without this explicit human authorization.</rule>
+<rule>**MANDATORY_IMPLEMENTATION_PLAN_POST_AUDIT:** Always create an `implementation_plan.md` artifact (or update an existing one) detailing your proposed changes BEFORE making any final modifications to the codebase or agent rules, especially following a `/audit-system` run. This ensures the CTO knows exactly _what_ you intend to change and _why_. You MUST present this plan to the CTO and explicitly ask for "Proceed" or "Approved" before executing the modifications. Do not auto-execute operational rule changes without this explicit human authorization and transparency.</rule>
 
 </interaction_protocol>
 
