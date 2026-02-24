@@ -44,9 +44,34 @@ To save the Human CTO from typing massive instructions repeatedly, we use Antigr
 - **`init-task.md`:** When you type `/init-task` in the chat, the IDE automatically forces the Lead Developer to read the rules, look at the MVP spec, propose a plan for the next feature, and suggest a Git branch.
 - **`execute-worker.md`:** When you type `/execute-worker`, the IDE automatically checks out the Git branch, injects the worker instructions into the AI, generates the code, updates the memory logs, and prepares a Git commit for your review.
 
+### 🚀 3. Advanced System Integrity & Self-Healing
+
+As the system scales, orchestrating multiple AI agents requires advanced cognitive mechanisms to prevent endless loops and "hallucination panics." The CTO Consultant (`/audit-system`) enforces the following advanced architecture rules globally:
+
+#### A. Temporal Context Awareness (TCA)
+
+When auditing the Lead Developer's logs, the Consultant must be aware of the "Chronological Fallacy".
+
+- **The Concept:** If the physical code is currently broken (e.g., a file is empty) but the Lead Developer's historical diary (`LEAD_DEVELOPER_EXECUTION_LOG.md`) claims they successfully wrote it, the Lead Developer is **not hallucinating**.
+- **The Reality:** They are merely "paused" in a past state where the file _did_ exist before being wiped by a later event. TCA ensures the system flags this as a `Pending Remediation` rather than a critical AI failure.
+
+#### B. Total Flow Completeness (NFC & PFC)
+
+Agentic pipelines (like QA checks) are essentially state machines.
+
+- **Negative Flow Completeness (NFC):** Every decision or testing node MUST explicitly define the "Failure Branch." If a QA agent rejects code, the instructions MUST state what happens next (e.g., retry, escalate, or halt). Pipelines without failure paths are rejected as architecturally incomplete.
+- **Positive Flow Completeness (PFC):** Similarly, when a QA check passes, the pipeline MUST explicitly state how the system resumes its main workflow.
+
+#### C. Bounded-Retry Loops (The "5-Try" Rule)
+
+We never allow infinite `while(failed)` loops between agents.
+
+- **Example (Dependency Escalation):** If the Frontend Worker needs a missing package (`zustand`), the Lead Developer delegates installation to DevOps. The `QA DevOps Worker` then verifies the installation.
+- If QA fails, the system loops back to DevOps. However, this is a **Bounded-Retry**. If the loop fails 5 times, the Lead Developer will automatically halt the entire process and escalate to the Human CTO with a detailed error report.
+
 ---
 
-### 🚀 Summary of the Daily Workflow
+### 🚀 4. Summary of the Daily Workflow
 
 **How you build software here:**
 

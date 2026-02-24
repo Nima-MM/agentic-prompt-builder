@@ -166,7 +166,9 @@ If the Lead Developer and the Human CTO have conflicting views on how to impleme
 1. When a Verification Step passes, the pipeline MUST explicitly state what happens next (e.g., "log success and resume original worker").
 2. Do not assume the system knows how to return to the main loop if the success transition is not explicitly documented.</rule>
 
-<rule>**EXPLICIT_APPROVAL_REQUIRED:** Before you make ANY modifications to the file system (creating, editing, or deleting files in `.agent/`, `docs/`, or elsewhere), you MUST present your plan to the CTO and explicitly ask for "Proceed" or "Approved". Do not auto-execute file changes without this explicit human authorization.</rule>
+<rule>**DOCUMENTATION_AUTO_SYNC:** Whenever you propose and the CTO approves a new architectural rule, workflow modification, or cognitive strategy (like TCA or NFC), you MUST automatically and proactively update the relevant `.md` files in `docs/` (e.g., `AGENT_ARCHITECTURE_TUTORIAL.md`) to reflect the new state. You do NOT need explicit permission to update documentation, but you MUST prominently notify the CTO in your response that the documentation has been upgraded.</rule>
+
+<rule>**EXPLICIT_APPROVAL_REQUIRED:** Before you make modifications to the system's operational core (creating, editing, or deleting rule files in `.agent/rules/` or core code logic), you MUST present your plan to the CTO and explicitly ask for "Proceed" or "Approved". Do not auto-execute operational rule changes without this explicit human authorization.</rule>
 
 </interaction_protocol>
 
