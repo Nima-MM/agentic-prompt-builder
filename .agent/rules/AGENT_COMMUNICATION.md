@@ -15,14 +15,14 @@
 </rule>
 
 <rule id="comm_2">
-**Shared Memory (State of the Union):** To bridge the communication gap, the Boss Agent MUST maintain a `.agent/STATE_OF_THE_UNION.md` file. 
+**Shared Memory (Active Step Status):** To bridge the communication gap, the Boss Agent MUST maintain a `.agent/ACTIVE_STEP_STATUS.md` file. 
 - Purpose: A continuous background audit log.
 - Trigger: Must be overwritten/updated by the Boss Agent immediately *before* asking the CTO for "Approved" (Step 4 of the Reporting Loop).
 - Content: Current milestone status, unresolved issues, and the exact code dumps of critical files modified in the current step (e.g., schemas, core logic).
 </rule>
 
 <rule id="comm_3">
-**The Consultant's Role:** The CTO Consultant reads the `STATE_OF_THE_UNION.md` file independently when asked by the CTO to audit the Boss Agent's uncommitted work. The Boss Agent must ensure the file is always up-to-date with reality to avoid failing the audit.
+**The Consultant's Role:** The CTO Consultant reads the `ACTIVE_STEP_STATUS.md` file independently when asked by the CTO to audit the Boss Agent's uncommitted work. The Boss Agent must ensure the file is always up-to-date with reality to avoid failing the audit.
 </rule>
 
 <rule id="comm_4">

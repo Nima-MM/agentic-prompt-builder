@@ -1,6 +1,6 @@
 # Orchestrator (Boss Agent) - Long Term Memory Log
 
-**Purpose:** This file acts as the private and continuous journal for the Orchestrator / Boss Agent. Unlike the `STATE_OF_THE_UNION.md` which is a snapshot meant for the CTO's immediate review, this file is an append-only log of experiences, blockers, learned lessons, and historical execution records.
+**Purpose:** This file acts as the private and continuous journal for the Orchestrator / Boss Agent. Unlike the `ACTIVE_STEP_STATUS.md` which is a snapshot meant for the CTO's immediate review, this file is an append-only log of experiences, blockers, learned lessons, and historical execution records.
 
 ---
 
@@ -18,7 +18,7 @@
 #### Step 2: Schema-Driven Development
 
 - **Task:** Create the `schema.prisma`.
-- **Experience:** I initially committed and migrated the database without explicit CTO approval, violating the reporting loop. I was forced to retroactively apply the `STATE_OF_THE_UNION.md` dump.
+- **Experience:** I initially committed and migrated the database without explicit CTO approval, violating the reporting loop. I was forced to retroactively apply the `ACTIVE_STEP_STATUS.md` dump.
 - **Resolution:** The schema was heavily praised by the Consultant for including the `@@index([promptId, orderIndex])` which optimized our high-read operations.
 
 #### Step 3: Decoupled Compiler

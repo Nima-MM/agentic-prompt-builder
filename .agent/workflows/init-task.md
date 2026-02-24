@@ -4,7 +4,7 @@ description: Initialize a new execution step for the MVP build.
 
 This workflow is used by the Boss Agent to safely prepare and plan the next architectural step according to the CTO's directives.
 
-1.  **Ingest Context:** Read `.agent/rules/ORCHESTRATION_RULES.md` and `.agent/STATE_OF_THE_UNION.md` to understand the current rules and the exact code state left behind by the previous step.
+1.  **Ingest Context:** Read `.agent/rules/ORCHESTRATION_RULES.md` and `.agent/ACTIVE_STEP_STATUS.md` to understand the current rules and the exact code state left behind by the previous step.
 
 2.  **Analyze Request:** If the CTO provided a specific step (e.g., "Step 3: Decoupled Compiler"), locate that step within `docs/requirements/MVP_SPEC.md` and `.agent/rules/TECH_STACK.md`.
 

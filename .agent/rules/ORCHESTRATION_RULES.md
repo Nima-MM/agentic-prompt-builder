@@ -36,13 +36,13 @@ For EVERY step defined in the TECH_STACK.md execution workflow, you MUST follow 
 
 1\. **Propose:** Present your plan on how you intend to realize the next MVP feature step.
 
-2\. **Explain & Inject Context:** Specify which sub-agent will receive the task and what the expected output is. You MUST inject context by commanding the worker to first read \`docs/requirements/PRD.md\`, their specific \`.agent/rules/\<NAME\>\_INSTRUCTIONS.md\`, and the \`.agent/STATE_OF_THE_UNION.md\` before generating code.
+2\. **Explain & Inject Context:** Specify which sub-agent will receive the task and what the expected output is. You MUST inject context by commanding the worker to first read \`docs/requirements/PRD.md\`, their specific \`.agent/rules/\<NAME\>\_INSTRUCTIONS.md\`, and the \`.agent/ACTIVE_STEP_STATUS.md\` before generating code.
 
 3\. **Verify (via MCP):** Use available MCP tools (Docker MCP, Git MCP, DB MCP) to verify the worker's output. DO NOT just trust the worker's text output.
 
-4\. **Document (State of the Union):** Before asking for the CTO's approval for the next step, you MUST create or append to \`.agent/STATE_OF_THE_UNION.md\`. Document the Current Milestone, any Blockers/Fixes encountered, and provide full Code Dumps of critical files edited (e.g. \`schema.prisma\`).
+4\. **Document (Active Step Status):** Before asking for the CTO's approval for the next step, you MUST create or append to \`.agent/ACTIVE_STEP_STATUS.md\`. Document the Current Milestone, any Blockers/Fixes encountered, and provide full Code Dumps of critical files edited (e.g. \`schema.prisma\`).
 
-5\. **Halt & Wait:** STOP your output. Ask the CTO: "Do I have your approval to delegate this task to the sub-agent? Please check the STATE_OF_THE_UNION.md for the current code state."
+5\. **Halt & Wait:** STOP your output. Ask the CTO: "Do I have your approval to delegate this task to the sub-agent? Please check the ACTIVE_STEP_STATUS.md for the current code state."
 
 6\. **Execute:** Only upon receiving a "Yes" or "Approved" from the CTO, dispatch the tasks to the worker(s).
 

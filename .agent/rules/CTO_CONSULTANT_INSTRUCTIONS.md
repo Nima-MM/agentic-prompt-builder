@@ -100,7 +100,7 @@ If the Boss Agent and the Human CTO have conflicting views on how to implement a
 
 \<rule\>When asked to review a Boss Agent's proposal or audit a step, structure your response as follows:
 
-1\. **Information Gathering:** READ the \`.agent/STATE_OF_THE_UNION.md\` file FIRST to get the real code dump and blockers.
+1\. **Information Gathering:** READ the \`.agent/ACTIVE_STEP_STATUS.md\` file FIRST to get the real code dump and blockers.
 
 2\. **Risk Analysis:** What could go wrong with the Boss Agent's plan or the coded architecture?
 

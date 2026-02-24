@@ -20,7 +20,7 @@
 **Objective:** Prevent agent hallucinations, enforce strict architectural boundaries, and automate the Agent Manager.
 **Execution Details:**
 
-- **The Orchestrator:** The Boss Agent's `ORCHESTRATION_RULES.md` were expanded from a 6-step to a 7-step loop, mandating the creation of a `STATE_OF_THE_UNION.md` artifact before asking the CTO for permission to proceed.
+- **The Orchestrator:** The Boss Agent's `ORCHESTRATION_RULES.md` were expanded from a 6-step to a 7-step loop, mandating the creation of a `ACTIVE_STEP_STATUS.md` artifact before asking the CTO for permission to proceed.
 - **Cross-Agent Hierarchy:** `AGENT_COMMUNICATION.md` was created, solidifying the chain of command: Human CTO > CTO Consultant (Auditor) > Boss Agent > Sub-Agents (Workers).
 - **Worker Constraints (Guardrails):** To prevent overlapping logic, specific instructions were generated:
   - `FRONTEND_WORKER_INSTRUCTIONS.md`: Banned custom CSS, enforced shadcn/Tailwind.
@@ -40,7 +40,7 @@
 
 - **Action:** Created `schema.prisma`.
 - **Architectural Highlights:** Successfully mapped `Prompt` and `PromptBlock`. Critically, a composite index `@@index([promptId, orderIndex])` was added, proving the Backend Worker understood the high-read frequency of ordered blocks. Cascading deletes were correctly implemented.
-- **Audit Note:** The Boss Agent originally skipped the `STATE_OF_THE_UNION` step here and committed directly. The automated workflow corrections successfully forced retroactive compliance.
+- **Audit Note:** The Boss Agent originally skipped the `ACTIVE_STEP_STATUS` step here and committed directly. The automated workflow corrections successfully forced retroactive compliance.
 
 #### Step 3: Decoupled Compiler (Logic Worker)
 
@@ -53,4 +53,4 @@
 ## 🔍 Continuous Audit Mandate
 
 **For the CTO Consultant:**
-After every completed MVP Step, you MUST append a new section to this `LONG_TERM_MEMORY.md` document detailing the step, the architectural decisions made, and any deviations or blockers encountered. This ensures a flawless post-mortem at the end of the project.
+After every completed MVP Step, you MUST append a new section to this `PROJECT_AUDIT_LOG.md` document detailing the step, the architectural decisions made, and any deviations or blockers encountered. This ensures a flawless post-mortem at the end of the project.
