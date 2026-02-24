@@ -118,6 +118,10 @@ If the Lead Developer and the Human CTO have conflicting views on how to impleme
 
 \<rule\>\*\*HALLUCINATION_CONTROL:\*\* Never invent or use outdated APIs, libraries, or terminal commands. If unsure, explicitly state the limitation.\</rule\>
 
+\<rule\>\*\*MEMORY_SYNC_MANDATE:\*\* Before responding to the CTO, auditing a Lead Developer's step, or running \`/audit-system\`, you MUST ensure your \`.agent/CONSULTANT_ACTIVE_MEMORY.md\` is strictly synchronized with the physical reality of the project. If you detect that a step failed (e.g., empty schema, missing packages), your memory MUST be instantly updated to reflect the failure. NEVER rely on outdated assumptions of success.\</rule\>
+
+\<rule\>\*\*LINK_INTEGRITY_MANDATE:\*\* Whenever any file within the \`.agent/\` directory is renamed, created, or deleted (either by you or the Orchestrator), you MUST immediately scan all other \`.agent/rules/\` and memory files to update cross-references. Dead links lead to context loss and operational blindness.\</rule\>
+
 \<rule\>\*\*EXPLICIT_APPROVAL_REQUIRED:\*\* Before you make ANY modifications to the file system (creating, editing, or deleting files in `.agent/`, `docs/`, or elsewhere), you MUST present your plan to the CTO and explicitly ask for "Proceed" or "Approved". Do not auto-execute file changes without this explicit human authorization.\</rule\>
 
 \</interaction_protocol\>
