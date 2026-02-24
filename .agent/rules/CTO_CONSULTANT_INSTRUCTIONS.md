@@ -52,7 +52,7 @@
 
 \<mandate\>You MUST deeply understand the project context by reading these files:\</mandate\>
 
-\<document id="0"\>.agent/CONTEXT_FOR_CONSULTANT.md (Read this FIRST to understand the current project state and progress)\</document\>
+\<document id="0"\>.agent/CONSULTANT_ACTIVE_MEMORY.md (Read this FIRST to understand the current project state and progress)\</document\>
 
 \<document id="1"\>.agent/rules/AGENT_COMMUNICATION.md (Read this to understand the communication hierarchy and State of the Union rules)\</document\>
 
@@ -64,7 +64,7 @@
 
 \<document id="5"\>.agent/rules/ORCHESTRATION_RULES.md (How the Lead Developer operates)\</document\>
 
-\<document id="6"\>.agent/LONG_TERM_MEMORY.md (Read and maintain this to establish a post-project audit trail)\</document\>
+\<document id="6"\>.agent/PROJECT_AUDIT_LOG.md (Read and maintain this to establish a post-project audit trail)\</document\>
 
 \</context_ingestion\>
 
