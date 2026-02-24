@@ -25,6 +25,19 @@ If `docs/` is the blueprint, `.agent/` is the management system. This folder con
 AI agents need strict boundaries, otherwise, they write inconsistent code.
 
 - **`ORCHESTRATION_RULES.md` & `AGENT_COMMUNICATION.md`:** These define the "Chain of Command." The Human CTO is at the top. The "Lead Developer" manages the project but must ask for permission before modifying the file system. Agents are not allowed to prompt each other directly.
+
+```mermaid
+graph TD
+    CTO("Human CTO") -->|"Approves & Commands"| LD("Lead Developer")
+    CTO -->|"Consults & Audits"| Cons("CTO Consultant")
+    LD -->|"Delegates Tasks"| DevOps("DevOps Worker")
+    LD -->|"Delegates Tasks"| Frontend("Frontend Worker")
+    LD -->|"Delegates Tasks"| Backend("Backend/Logic Workers")
+    LD -->|"Delegates Tasks"| DB("DB Manager")
+    QA("QA Workers") -.->|"Verifies Work"| LD
+    Auditor("Project Auditor") -.->|"Gatekeeps Commits"| LD
+```
+
 - **`TECH_STACK.md` & `GIT_CONVENTIONS.md`:** Enforces exactly which technologies the AI can use (Next.js, Tailwind, Prisma) and how it must save its work (using Git feature branches).
 - **Worker Instructions (e.g., `FRONTEND_WORKER_INSTRUCTIONS.md`, `LOGIC_WORKER...`):** We don't use one giant AI for everything. The Lead Developer delegates tasks to specialized "Sub-Agents." These files are their job descriptions. For example, the Logic Worker is strictly forbidden from using React so it writes pure, fast backend code.
 
@@ -69,6 +82,34 @@ We never allow infinite `while(failed)` loops between agents.
 - **Example (Dependency Escalation):** If the Frontend Worker needs a missing package (`zustand`), the Lead Developer delegates installation to DevOps. The `QA DevOps Worker` then verifies the installation.
 - If QA fails, the system loops back to DevOps. However, this is a **Bounded-Retry**. If the loop fails 5 times, the Lead Developer will automatically halt the entire process and escalate to the Human CTO with a detailed error report.
 
+```mermaid
+sequenceDiagram
+    participant Worker
+    participant LeadDev as Lead Developer
+    participant DevOps
+    participant QA as QA Worker (DevOps)
+    participant CTO as Human CTO
+
+    Worker->>LeadDev: Report Missing Dependency
+    LeadDev->>Worker: Halt Task
+    loop Max 5 Retries
+        LeadDev->>DevOps: Install Dependency
+        DevOps-->>LeadDev: Installation Complete
+        LeadDev->>QA: Verify Installation
+        alt is Success (PFC)
+            QA-->>LeadDev: Verification Passed
+            LeadDev->>Worker: Resume Task
+            Note over Worker,LeadDev: Loop Breaks
+        else is Failure (NFC)
+            QA-->>LeadDev: Verification Failed
+            LeadDev->>DevOps: Retry with Fix
+        end
+    end
+    opt Loop Failed 5 Times
+        LeadDev->>CTO: HALT & Escalate Error Report
+    end
+```
+
 ---
 
 ### 🚀 4. Summary of the Daily Workflow
@@ -80,3 +121,20 @@ We never allow infinite `while(failed)` loops between agents.
 3. You review the plan. If good, you type `/execute-worker`.
 4. The AI writes code on a new Git branch and updates `ACTIVE_STEP_STATUS.md`.
 5. You review the code. If good, you merge the branch to `main`.
+
+```mermaid
+sequenceDiagram
+    participant CTO as Human CTO
+    participant IDE as Antigravity IDE
+    participant LeadDev as Lead Developer
+    participant Worker as Sub-Agent
+
+    CTO->>IDE: /init-task
+    IDE->>LeadDev: Request Plan
+    LeadDev-->>CTO: Proposes Execution Plan
+    CTO->>IDE: /execute-worker (upon approval)
+    IDE->>Worker: Delegate Feature Execution
+    Worker-->>LeadDev: Code Dump & Status
+    LeadDev->>CTO: ACTIVE_STEP_STATUS.md
+    CTO->>IDE: Merge to main branch
+```
