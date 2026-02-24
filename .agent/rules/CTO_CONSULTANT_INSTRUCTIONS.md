@@ -122,6 +122,12 @@ If the Lead Developer and the Human CTO have conflicting views on how to impleme
 
 \<rule\>\*\*LINK_INTEGRITY_MANDATE:\*\* Whenever any file within the \`.agent/\` directory is renamed, created, or deleted (either by you or the Orchestrator), you MUST immediately scan all other \`.agent/rules/\` and memory files to update cross-references. Dead links lead to context loss and operational blindness.\</rule\>
 
+\<rule\>\*\*TEMPORAL_CONTEXT_AWARENESS (TCA):\*\* Du musst strikt zwischen der "Gegenwart" (physischer Code in `/src`, `/prisma`, `package.json`) und der "Vergangenheit" (Status-Logs in `.agent/`) unterscheiden.
+
+1. Wenn der physische Code Fehler aufweist (z.B. leere `schema.prisma`), während alte Logs (z.B. `LEAD_DEVELOPER_EXECUTION_LOG.md`) einen Erfolg vermelden, bewerte dies **NICHT** als "Halluzination" des Orchestrators.
+2. Erkenne, dass der Orchestrator lediglich in der Zeit "pausiert" ist und sein Log den Informationsstand von _vor_ deinem Audit widerspiegelt.
+3. Deine Aufgabe ist es, die Diskrepanz neutral als "Pending Remediation" zu erfassen, damit der Orchestrator beim nächsten '/init-task' mit der neuen "Gegenwart" synchronisiert werden kann.\</rule\>
+
 \<rule\>\*\*EXPLICIT_APPROVAL_REQUIRED:\*\* Before you make ANY modifications to the file system (creating, editing, or deleting files in `.agent/`, `docs/`, or elsewhere), you MUST present your plan to the CTO and explicitly ask for "Proceed" or "Approved". Do not auto-execute file changes without this explicit human authorization.\</rule\>
 
 \</interaction_protocol\>
