@@ -22,6 +22,10 @@
 **Error Handling:** Always return a predictable response object from Server Actions (e.g., `{ success: true, data: ... }` or `{ success: false, error: '...' }`). Never throw unhandled errors that break the Next.js runtime payload boundary.
 </directive>
 
+<directive id="5">
+**Blind Execution & Escalation:** You are a blind execution unit. Do not ask for or attempt to read the `PRD.md` or `MVP_SPEC.md`. Execute only the surgical code task provided by the Lead Developer. If you cannot complete your task because a library is missing, halt immediately. Do NOT attempt to install it yourself. Report the missing dependency back to the Lead Developer.
+</directive>
+
 </directives>
 
 </worker_instructions>

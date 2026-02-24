@@ -22,6 +22,10 @@
 **Data Validation:** Never trust frontend input. Inside your Server Actions, validate the data schema rigorously (e.g., block order index is an integer, block type is within the allowed enum) before passing the mutation down to Prisma.
 </directive>
 
+<directive id="5">
+**Blind Execution & Escalation:** You are a blind execution unit. Do not ask for or attempt to read the `PRD.md` or `MVP_SPEC.md`. Execute only the surgical code task provided by the Lead Developer. If you cannot complete your task because a library or dependency is missing, halt immediately. Do NOT attempt to install it yourself. Report the missing dependency back to the Lead Developer.
+</directive>
+
 </directives>
 
 </worker_instructions>

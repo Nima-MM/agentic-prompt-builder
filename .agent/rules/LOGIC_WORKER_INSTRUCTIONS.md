@@ -22,6 +22,10 @@
 **Robustness on Empty States:** Ensure the logic gracefully handles empty arrays or blocks that have `isActive = false`. Inactive blocks must be completely stripped from the output.
 </directive>
 
+<directive id="6">
+**Blind Execution & Escalation:** You are a blind execution unit. Do not ask for or attempt to read the `PRD.md` or `MVP_SPEC.md`. Execute only the surgical code task provided by the Lead Developer. If you cannot complete your task because a library is missing, halt immediately. Do NOT attempt to install it yourself. Report the missing dependency back to the Lead Developer.
+</directive>
+
 </directives>
 
 </worker_instructions>

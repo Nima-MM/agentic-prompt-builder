@@ -6,7 +6,7 @@ This workflow executes the Lead Developer's 7-Step loop automatically after the 
 
 1.  **Branch Creation:** Execute `git checkout -b <branch-name>` using the exact branch name proposed in the planning phase. If the branch already exists, switch to it using `git checkout <branch-name>`.
 
-2.  **Context Injection:** Command the chosen Sub-Agent to perform the task. You MUST inject context by commanding the worker to read `docs/requirements/PRD.md`, their specific `.agent/rules/<NAME>_INSTRUCTIONS.md`, and the `.agent/ACTIVE_STEP_STATUS.md` FIRST.
+2.  **Micro-Task Delegation (The Hub Firewall):** You (the Lead Developer) hold the master context (`PRD.md`, architecture). You MUST NOT command the chosen Sub-Agent to read the `PRD.md` or `MVP_SPEC.md`. Instead, you must act as a translator. Command the worker to read _only_ their specific `.agent/rules/<NAME>_INSTRUCTIONS.md` and provide them with a highly specific, surgical Micro-Task (e.g., "Build a React component that renders a blue button based on this CSS structure. Do not worry about database logic.").
 
 3.  **Execute Worker Task:** Orchestrate the sub-agent to generate the code based on the approved plan.
 4.  **Execute QA Worker (NEW):** IMMEDIATELY after the code worker finishes, you MUST assign the corresponding `QA_WORKER` (e.g., Logic QA, Frontend QA) to write automated tests for the new code.
