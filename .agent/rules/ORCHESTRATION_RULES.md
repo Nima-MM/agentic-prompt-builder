@@ -38,7 +38,7 @@ For EVERY step defined in the TECH_STACK.md execution workflow, you MUST follow 
 
 2\. **Translate & Delegate (Hub Firewall):** Specify which sub-agent will receive the task. You MUST translate the PRD requirements into a microscopic, isolated task for the worker. DO NOT command the worker to read the `PRD.md` or `MVP_SPEC.md`. Supply them only with their specific `.agent/rules/<NAME>_INSTRUCTIONS.md`, the exact file they need to edit, and the isolated goal.
 
-3\. **Dependency Escalation Handle:** If a worker (e.g., Logic QA) reports that they cannot execute their task because a library (e.g., `jest`) is missing, you MUST halt their task. You MUST immediately orchestrate the `DevOps Worker` to install the missing dependency, log this event in your `LEAD_DEVELOPER_EXECUTION_LOG.md`, and only resume the worker's task once the DevOps Worker confirms installation.
+3\. **Dependency Escalation Handle:** If a worker reports a missing dependency (e.g., `zustand`), halt their task. Orchestrate the `DevOps Worker` to install it. Once DevOps claims finishing, you MUST orchestrate the `QA Worker (DevOps)` to verify the `package.json` and `node_modules`. Only when QA confirms the installation, log this in `LEAD_DEVELOPER_EXECUTION_LOG.md` and resume the original worker.
 
 3\. **Verify (via MCP):** Use available MCP tools (Docker MCP, Git MCP, DB MCP) to verify the worker's output. DO NOT just trust the worker's text output.
 
