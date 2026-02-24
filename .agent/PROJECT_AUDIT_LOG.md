@@ -48,6 +48,11 @@
 - **Architectural Highlights:** Successfully decoupled from React. Created a pure function `compilePrompt(blocks, mode)` supporting `markdown`, `xml`, and `hybrid` output formats.
 - **Audit Note:** Code matches ADR 0001 perfectly. Zero-latency requirement achieved.
 
+### Phase 2.5: QA Infrastructure Implementation (Pending Delegation)
+
+- **Audit Note:** The CTO Consultant identified a critical gap: QA Workers were assigned to use `jest` and `@testing-library`, but these are missing from `package.json`.
+- **Action Required:** The CTO and Lead Developer must instruct the `DEVOPS_WORKER` to install these dependencies and initialize testing configurations before QA step execution can begin.
+
 ---
 
 ## 🔍 Continuous Audit Mandate
