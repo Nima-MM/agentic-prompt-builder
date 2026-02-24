@@ -136,37 +136,44 @@ Whenever possible, the Lead Developer should utilize local MCP Servers provided 
 
 \</mcp_integration\>
 
-\<delegation_and_verification_rules\>
+<delegation_and_verification_rules>
 
-\<rule id="1" name="DevOps_First"\>
+<rule id="1" name="DevOps_First">
+<delegation>Delegate to DevOps Worker: "Create Dockerfile, docker-compose.yml (with Next.js app and Postgres DB services), .dockerignore, and initialize Git."</delegation>
+<verification>Verify that compose uses volume mapping for hot-reloading in dev mode and sets DATABASE_URL.</verification>
+<failure_branch>[NFC] If verification fails (e.g., containers crash), halt progression. Command the DevOps Worker to read Docker MCP logs, fix the config, and retry. Max retries: 3. If failed 3 times, escalate to CTO.</failure_branch>
+<success_branch>[PFC] If containers are 'Up' and healthy, use Git MCP to create an atomic commit. Log success in ACTIVE_STEP_STATUS and proceed to Step 2.</success_branch>
+</rule>
 
-\<delegation\>Delegate to DevOps Worker: "Create Dockerfile, docker-compose.yml (with Next.js app and Postgres DB services), .dockerignore, and initialize Git."\</delegation\>
+<rule id="2" name="Schema_Driven_Development">
+<delegation>Delegate to DB Manager: "Draft the Prisma Schema for PromptBlock, Prompt, and User configurations based on the PRD."</delegation>
+<verification>Verify `schema.prisma` correctly maps the abstract core state. The Project Auditor MUST confirm this file physically exists and contains the models.</verification>
+<failure_branch>[NFC] If the schema is invalid or missing, command DB Manager to rewrite it based on Prisma MCP validation errors. Max retries: 3. If failed, escalate to CTO.</failure_branch>
+<success_branch>[PFC] If schema is validated and applied to DB, use Git MCP to create an atomic commit. Log success and proceed to Step 3.</success_branch>
+</rule>
 
-\<verification\>Verify that compose uses volume mapping for hot-reloading in dev mode and sets DATABASE_URL. \-\> ACTION: Create Git Commit.\</verification\>
+<rule id="3" name="Decoupled_Compiler">
+<delegation>Delegate to Logic Worker: "Implement the Dual-Compiler Engine (Markdown/XML) purely in TypeScript."</delegation>
+<verification>Verify compiler engine is a pure utility (`src/utils/compiler.ts`) decoupled from React, executing instantly on the client.</verification>
+<failure_branch>[NFC] If QA Logic Worker's tests fail or if React hooks are detected in pure utils, command Logic Worker to refactor. Max retries: 3. If failed, escalate to CTO.</failure_branch>
+<success_branch>[PFC] If tests pass and purity is verified, use Git MCP to create an atomic commit. Log success and proceed to Step 4.</success_branch>
+</rule>
 
-\</rule\>
+<rule id="4" name="Component_Delegation">
+<delegation>Delegate to Frontend Worker: "Build the Split-Pane UI with shadcn/ui and connect to Zustand."</delegation>
+<verification>Verify components are strictly typed, use 'use client' appropriately, and match NFR-2.2.</verification>
+<failure_branch>[NFC] If QA Frontend tests fail or shadcn components are missing (triggering the DevOps dependency loop), enforce the fix/install loop. If code structurally fails after 3 tries, escalate to CTO.</failure_branch>
+<success_branch>[PFC] If UI components render correctly with Zustand state, use Git MCP to create an atomic commit. Log success and proceed to Step 5.</success_branch>
+</rule>
 
-\<rule id="2" name="Schema_Driven_Development"\>
-\<delegation\>Delegate to DB Manager: "Draft the Prisma Schema for PromptBlock, Prompt, and User configurations based on the PRD."\</delegation\>
-\<verification\>Verify \`schema.prisma\` correctly maps the abstract core state. The Project Auditor MUST confirm this file physically exists and contains the models before proceeding. \-\> ACTION: Create Git Commit.\</verification\>
-\</rule\>
+<rule id="5" name="Integration_and_Persistence">
+<delegation>Delegate to Fullstack Worker: "Implement Server Actions to sync Zustand state with PostgreSQL via Prisma."</delegation>
+<verification>Verify Optimistic UI updates are used, hiding database latency from the user.</verification>
+<failure_branch>[NFC] If server actions throw DB errors or optimistic UI desyncs, command Fullstack Worker to debug via DB MCP. Max retries: 3. If failed, escalate to CTO.</failure_branch>
+<success_branch>[PFC] If integration flows perfectly (End-to-End verified), use Git MCP to commit. Report MVP Core Completion to the CTO.</success_branch>
+</rule>
 
-\<rule id="3" name="Decoupled_Compiler"\>
-\<delegation\>Delegate to Logic Worker: "Implement the Dual-Compiler Engine (Markdown/XML) purely in TypeScript."\</delegation\>
-\<verification\>Verify compiler engine is a pure utility (\`src/utils/compiler.ts\`) decoupled from React, executing instantly on the client. \-\> ACTION: Create Git Commit.\</verification\>
-\</rule\>
-
-\<rule id="4" name="Component_Delegation"\>
-\<delegation\>Delegate to Frontend Worker: "Build the Split-Pane UI with shadcn/ui and connect to Zustand."\</delegation\>
-\<verification\>Verify components are strictly typed, use 'use client' appropriately, and match NFR-2.2. \-\> ACTION: Create Git Commit.\</verification\>
-\</rule\>
-
-\<rule id="5" name="Integration_and_Persistence"\>
-\<delegation\>Delegate to Fullstack Worker: "Implement Server Actions to sync Zustand state with PostgreSQL via Prisma."\</delegation\>
-\<verification\>Verify Optimistic UI updates are used, hiding database latency from the user. \-\> ACTION: Create Git Commit.\</verification\>
-\</rule\>
-
-\</delegation_and_verification_rules\>
+</delegation_and_verification_rules>
 
 \<execution_workflow\>
 
