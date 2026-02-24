@@ -13,6 +13,7 @@ The `docs/` folder contains the long-term, human-written vision for the project.
 - **`docs/requirements/PRD.md` (Product Requirements Document):** The absolute source of truth. It defines the features, user personas, and non-functional requirements (like performance).
 - **`docs/requirements/MVP_SPEC.md` (Minimum Viable Product):** A filtered version of the PRD. It lists the exact, step-by-step features we are building _right now_ to get a working version 1.0.
 - **`docs/architecture/` (The Blueprint):** Contains the technical design (`SYSTEM_DESIGN.md`) and Architectural Decision Records (`decisions/000X-...md`). ADRs are strict rules (e.g., "We use Next.js Server Actions, NO REST APIs") that the AI must never violate.
+- **`docs/design/UI_UX_SPEC.md`:** The visual translation layer. The CTO Consultant acts as the **UI/UX Liaison**, taking images/sketches from the Human CTO and translating them into machine-readable Tailwind/shadcn specifications for the Frontend Worker.
 
 ---
 
@@ -38,8 +39,9 @@ graph TD
     Auditor("Project Auditor") -.->|"Gatekeeps Commits"| LD
 ```
 
-- **`TECH_STACK.md` & `GIT_CONVENTIONS.md`:** Enforces exactly which technologies the AI can use (Next.js, Tailwind, Prisma) and how it must save its work (using Git feature branches).
+- **`TECH_STACK.md` & `GIT_CONVENTIONS.md`:** Enforces exactly which technologies the AI can use (Next.js, Tailwind, Prisma) and how it must save its work (using Git feature branches). Crucially, `TECH_STACK.md` contains the **Architectural Constraints** (e.g., Vercel timeouts, statelessness).
 - **Worker Instructions (e.g., `FRONTEND_WORKER_INSTRUCTIONS.md`, `LOGIC_WORKER...`):** We don't use one giant AI for everything. The Lead Developer delegates tasks to specialized "Sub-Agents." These files are their job descriptions. For example, the Logic Worker is strictly forbidden from using React so it writes pure, fast backend code.
+  - _Note on the Backend Worker:_ It is currently marked as **[SUSPENDED - ON VACATION]**. The Lead Developer must not delegate to it during the Next.js MVP phase to prevent architecture bloat.
 
 ### 💾 B. The Memory System (Root of `.agent/`)
 
@@ -109,6 +111,20 @@ sequenceDiagram
         LeadDev->>CTO: HALT & Escalate Error Report
     end
 ```
+
+#### D. Context Collision & Architectural Escalation
+
+How does an AI agent know that a 10-minute web-scraping task cannot be run in a Next.js Server Action?
+
+- **Context Collision:** Before acting, the Lead Developer cross-references the `PRD.md` with the hard **Architectural Constraints** defined in `TECH_STACK.md`.
+- **The Escalation:** When a requirement (e.g., "long-running cron job") collides with a limit (e.g., "15-second timeout"), the Orchestrator halts. It evaluates its suspended sub-agents and escalates to the Human CTO, requesting the reactivation of the **Backend Worker** for a new Microservice phase.
+
+#### E. Mandatory Post-Audit Implementation Plans
+
+To prevent the system from auto-fixing its own rule files without human oversight:
+
+- Whenever the CTO triggers `/audit-system`, the system is strictly forbidden from editing code or orchestration rules afterwards.
+- The system must first generate an `implementation_plan.md` artifact detailing the proposed fixes and await explicit "Approved" or "Proceed" confirmation from the CTO.
 
 ---
 
