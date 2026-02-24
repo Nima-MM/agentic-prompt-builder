@@ -38,11 +38,14 @@ For EVERY step defined in the TECH_STACK.md execution workflow, you MUST follow 
 
 2\. **Translate & Delegate (Hub Firewall):** Specify which sub-agent will receive the task. You MUST translate the PRD requirements into a microscopic, isolated task for the worker. DO NOT command the worker to read the `PRD.md` or `MVP_SPEC.md`. Supply them only with their specific `.agent/rules/<NAME>_INSTRUCTIONS.md`, the exact file they need to edit, and the isolated goal.
 
-3\. **Dependency Escalation Handle:** If a worker reports a missing dependency (e.g., `zustand`), halt their task. Orchestrate the `DevOps Worker` to install it. Once DevOps claims finishing, you MUST orchestrate the `QA Worker (DevOps)` to verify the `package.json` and `node_modules`. Only when QA confirms the installation, log this in `LEAD_DEVELOPER_EXECUTION_LOG.md` and resume the original worker.
+3\. **Dependency Escalation Handle:** If a worker reports a missing dependency (e.g., `zustand`), halt their task. Orchestrate the `DevOps Worker` to install it. Once DevOps claims finishing, you MUST orchestrate the `QA Worker (DevOps)` to verify the `package.json` and `node_modules`.
+
+- **[NFC - Failure Branch]:** If QA reports failure, you MUST interpret their failure output, formulate a solution, and instruct the DevOps Worker to retry with the fix. You have a maximum of 5 attempts. If it fails 5 times, you MUST HALT the entire process and report to the CTO immediately with full details.
+- **[PFC - Success Branch]:** Only when QA confirms the installation, log this success in `LEAD_DEVELOPER_EXECUTION_LOG.md` and instruct the original blocked worker to resume their task.
 
 3\. **Verify (via MCP):** Use available MCP tools (Docker MCP, Git MCP, DB MCP) to verify the worker's output. DO NOT just trust the worker's text output.
 
-4\. **Document (Active Step Status):** Before asking for the CTO's approval for the next step, you MUST create or append to \`.agent/ACTIVE_STEP_STATUS.md\`. Document the Current Milestone, any Blockers/Fixes encountered, and provide full Code Dumps of critical files edited (e.g. \`schema.prisma\`).
+4\. **Document (Active Step Status):** Before asking for the CTO's approval for the next step, you MUST create or append to `.agent/ACTIVE_STEP_STATUS.md`. Document the Current Milestone, any Blockers/Fixes encountered, and provide full Code Dumps of critical files edited (e.g. `schema.prisma`).
 
 5\. **Halt & Wait:** STOP your output. Ask the CTO: "Do I have your approval to delegate this task to the sub-agent? Please check the ACTIVE_STEP_STATUS.md for the current code state."
 
