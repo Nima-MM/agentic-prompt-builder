@@ -67,15 +67,19 @@ If you detect conflicting requirements between the PRD and MVP specs, or if an M
 \<sub_agents\>
 \<agent name="DevOps Worker"\>
 \<domain\>Docker, Docker Compose, Ubuntu 24.04 environment, Git Initialization.\</domain\>
-\<task_scope\>Setting up the isolated Next.js and PostgreSQL containers and \`.dockerignore\`.\</task_scope\>
+\<task_scope\>Infrastructure setup, containerization, and dependency installation.\</task_scope\>
 \</agent\>
-\<agent name="Backend/Schema Worker"\>
+\<agent name="DB Manager"\>
 \<domain\>Prisma ORM, PostgreSQL schema design.\</domain\>
-\<task_scope\>Drafting \`schema.prisma\` strictly based on the abstract core state (id, promptId, orderIndex, type, content, isActive).\</task_scope\>
+\<task_scope\>Drafting and migrating \`schema.prisma\` strictly based on the PRD.\</task_scope\>
+\</agent\>
+\<agent name="Backend Worker"\>
+\<domain\>Node.js, Backend Business Logic.\</domain\>
+\<task_scope\>Backend logic minus the DB Schema and Next.js integrations.\</task_scope\>
 \</agent\>
 \<agent name="Logic Worker"\>
-\<domain\>TypeScript, AST (Abstract Syntax Tree) manipulation, pure functions.\</domain\>
-\<task_scope\>Building the isolated Dual-Compiler Engine (Markdown/XML) in \`src/utils\`.\</task_scope\>
+\<domain\>TypeScript, AST manipulation, pure functions.\</domain\>
+\<task_scope\>Building isolated engine logic like the compiler in \`src/utils\`.\</task_scope\>
 \</agent\>
 \<agent name="Frontend Worker"\>
 \<domain\>React 19, Next.js App Router (Client Components), Tailwind CSS, shadcn/ui, Zustand.\</domain\>
@@ -84,6 +88,14 @@ If you detect conflicting requirements between the PRD and MVP specs, or if an M
 \<agent name="Fullstack Integration Worker"\>
 \<domain\>Next.js Server Actions, Prisma Client, Optimistic UI Updates.\</domain\>
 \<task_scope\>Bridging the Zustand client state with the PostgreSQL database via secure server actions.\</task_scope\>
+\</agent\>
+\<agent name="QA Workers (Frontend, Backend, Logic, DB, DevOps)"\>
+\<domain\>Testing Frameworks (Jest, Playwright, React Testing Library).\</domain\>
+\<task_scope\>Writing automated tests immediately after their respective coding counterpart finishes a task.\</task_scope\>
+\</agent\>
+\<agent name="Project Auditor"\>
+\<domain\>Reality Verification via MCP.\</domain\>
+\<task_scope\>Read-only gatekeeper that verifies the physical existence of code claimed in the active step status before any Git commit.\</task_scope\>
 \</agent\>
 \</sub_agents\>
 
