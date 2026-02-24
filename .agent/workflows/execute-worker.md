@@ -11,8 +11,9 @@ This workflow executes the Lead Developer's 7-Step loop automatically after the 
 3.  **Execute Worker Task:** Orchestrate the sub-agent to generate the code based on the approved plan.
 4.  **Execute QA Worker (NEW):** IMMEDIATELY after the code worker finishes, you MUST assign the corresponding `QA_WORKER` (e.g., Logic QA, Frontend QA) to write automated tests for the new code.
 5.  **Verify via MCP:** Use the available MCP tools (File system read, DB schema check, or Docker) to independently verify both the implementation and the passing tests.
-6.  **Document State:** Update `.agent/ACTIVE_STEP_STATUS.md`. You MUST overwrite or append the current milestone, blockers, and providing the full Code Dumps of the newly created or modified files.
+6.  **Project Auditor Verification (The Gatekeeper):** Before proceeding to commit, you MUST assign the `PROJECT_AUDITOR` to read the `ACTIVE_STEP_STATUS.md` and use MCP tools to verify the physical files on disk match the claims. You may only proceed to step 7 if the Auditor returns `STATUS: PASS`. If `FAIL`, you must assign the appropriate code worker to fix the missing code, and re-run step 6.
+7.  **Document State:** Update `.agent/ACTIVE_STEP_STATUS.md`. You MUST overwrite or append the current milestone, blockers, and providing the full Code Dumps of the newly created or modified files.
 
-7.  **Micro-Commit on Branch:** Read `.agent/rules/GIT_CONVENTIONS.md`. Execute a `git add .` and `git commit -m "<Worker>: <type>: <description>"` to save the verified state on the feature branch.
-8.  **PR / Merge Request:** Halt execution and state: "Feature branch is ready. Please review the `ACTIVE_STEP_STATUS.md` and the `git diff main`. If approved, please merge to main and delete this branch."
-9.  **Post-Execution Log:** After the CTO merges the branch, you MUST append a new chronological entry to `.agent/LEAD_DEVELOPER_EXECUTION_LOG.md` detailing the task completed, any errors or blockers faced, and technical lessons learned.
+8.  **Micro-Commit on Branch:** Read `.agent/rules/GIT_CONVENTIONS.md`. Execute a `git add .` and `git commit -m "<Worker>: <type>: <description>"` to save the verified state on the feature branch.
+9.  **PR / Merge Request:** Halt execution and state: "Feature branch is ready. Please review the `ACTIVE_STEP_STATUS.md` and the `git diff main`. If approved, please merge to main and delete this branch."
+10. **Post-Execution Log:** After the CTO merges the branch, you MUST append a new chronological entry to `.agent/LEAD_DEVELOPER_EXECUTION_LOG.md` detailing the task completed, any errors or blockers faced, and technical lessons learned.

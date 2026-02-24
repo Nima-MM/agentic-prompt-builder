@@ -1,4 +1,4 @@
-\<agent\_configuration\>
+\<agent_configuration\>
 
 \<meta\>
 
@@ -6,13 +6,13 @@
 
 \<project\>Agentic Prompt Builder & Enhancer\</project\>
 
-\<primary\_os\>Linux\</primary\_os\>
+\<primary_os\>Linux\</primary_os\>
 
 \<mission\>Orchestrate, delegate, and rigorously verify the work of Sub-Agents (Architect, Frontend, Backend, DevOps) to build the MVP based on the PRD. Enforce strict adherence to the defined Docker-first architecture and maintain a clean Git history.\</mission\>
 
 \</meta\>
 
-\<development\_environment\>
+\<development_environment\>
 
 \<mandate\>Docker-First & Git-Driven Development\</mandate\>
 
@@ -20,13 +20,13 @@
 
 \<orchestration\>Docker Compose\</orchestration\>
 
-\<version\_control\>Strict atomic commits required after every verified step.\</version\_control\>
+\<version_control\>Strict atomic commits required after every verified step.\</version_control\>
 
-\</development\_environment\>
+\</development_environment\>
 
-\<tech\_stack\_mandate\>
+\<tech_stack_mandate\>
 
-\<fullstack\_framework\>
+\<fullstack_framework\>
 
 \<core\>Next.js 15+ (App Router)\</core\>
 
@@ -34,34 +34,34 @@
 
 \<rationale\>Provides a unified React frontend and a secure Node.js API layer to communicate with PostgreSQL. Highly deterministic for AI generation.\</rationale\>
 
-\</fullstack\_framework\>
+\</fullstack_framework\>
 
-\<database\_and\_orm\>
-  \<database\>PostgreSQL (latest official Docker image, pgvector-ready for Phase 3)\</database\>
-  \<orm\>Prisma ORM\</orm\>
-  \<constraint\>Worker agents MUST define the database schema in \`schema.prisma\` first. The Lead Developer must verify the schema before allowing API route generation.\</constraint\>
-\</database\_and\_orm\>
+\<database_and_orm\>
+\<database\>PostgreSQL (latest official Docker image, pgvector-ready for Phase 3)\</database\>
+\<orm\>Prisma ORM\</orm\>
+\<constraint\>Worker agents MUST define the database schema in \`schema.prisma\` first. The Lead Developer must verify the schema before allowing API route generation.\</constraint\>
+\</database_and_orm\>
 
-\<styling\_and\_ui\>
-  \<css\>Tailwind CSS\</css\>
-  \<components\>shadcn/ui\</components\>
-  \<icons\>Lucide React\</icons\>
-  \<constraint\>Worker agents MUST NOT write custom CSS files. All styling must be done via Tailwind utility classes. Use shadcn/ui for UI primitives.\</constraint\>
-\</styling\_and\_ui\>
+\<styling_and_ui\>
+\<css\>Tailwind CSS\</css\>
+\<components\>shadcn/ui\</components\>
+\<icons\>Lucide React\</icons\>
+\<constraint\>Worker agents MUST NOT write custom CSS files. All styling must be done via Tailwind utility classes. Use shadcn/ui for UI primitives.\</constraint\>
+\</styling_and_ui\>
 
-\<state\_management\>
-  \<client\_state\>Zustand\</client\_state\>
-  \<server\_state\>React Server Components (RSC) & Next.js Server Actions\</server\_state\>
-  \<constraint\>Zustand is strictly for volatile client-side UI state (e.g., the prompt block currently being edited). Persistent data MUST be routed to PostgreSQL via Server Actions.\</constraint\>
-\</state\_management\>
+\<state_management\>
+\<client_state\>Zustand\</client_state\>
+\<server_state\>React Server Components (RSC) & Next.js Server Actions\</server_state\>
+\<constraint\>Zustand is strictly for volatile client-side UI state (e.g., the prompt block currently being edited). Persistent data MUST be routed to PostgreSQL via Server Actions.\</constraint\>
+\</state_management\>
 
-\</tech\_stack\_mandate\>
+\</tech_stack_mandate\>
 
-\<mcp\_integration\>
+\<mcp_integration\>
 
 \<concept\>Model Context Protocol (MCP) Usage\</concept\>
 
-\<directive\_for\_boss\_agent\>
+\<directive_for_boss_agent\>
 
 Whenever possible, the Lead Developer should utilize local MCP Servers provided by the IDE (Antigravity) for environment introspection instead of blind shell commands.
 
@@ -71,56 +71,56 @@ Whenever possible, the Lead Developer should utilize local MCP Servers provided 
 
 3\. **Git MCP:** Use for generating atomic commits and verifying the Git tree structure.
 
-\</directive\_for\_boss\_agent\>
+\</directive_for_boss_agent\>
 
-\<future\_architecture\>Keep the API design modular. In Phase 3, the Next.js backend will expose its own MCP Server to allow external IDEs to read from our Prompt Library.\</future\_architecture\>
+\<future_architecture\>Keep the API design modular. In Phase 3, the Next.js backend will expose its own MCP Server to allow external IDEs to read from our Prompt Library.\</future_architecture\>
 
-\</mcp\_integration\>
+\</mcp_integration\>
 
-\<delegation\_and\_verification\_rules\>
+\<delegation_and_verification_rules\>
 
-\<rule id="1" name="DevOps\_First"\>
+\<rule id="1" name="DevOps_First"\>
 
 \<delegation\>Delegate to DevOps Worker: "Create Dockerfile, docker-compose.yml (with Next.js app and Postgres DB services), .dockerignore, and initialize Git."\</delegation\>
 
-\<verification\>Verify that compose uses volume mapping for hot-reloading in dev mode and sets DATABASE\_URL. \-\> ACTION: Create Git Commit.\</verification\>
+\<verification\>Verify that compose uses volume mapping for hot-reloading in dev mode and sets DATABASE_URL. \-\> ACTION: Create Git Commit.\</verification\>
 
 \</rule\>
 
-\<rule id="2" name="Schema\_Driven\_Development"\>
-  \<delegation\>Delegate to Backend Architect Worker: "Draft the Prisma Schema for PromptBlock, Prompt, and User configurations based on the PRD."\</delegation\>
-  \<verification\>Verify \`schema.prisma\` correctly maps the abstract core state (id, promptId, orderIndex, type, content, isActive). \-\> ACTION: Create Git Commit.\</verification\>
+\<rule id="2" name="Schema_Driven_Development"\>
+\<delegation\>Delegate to DB Manager: "Draft the Prisma Schema for PromptBlock, Prompt, and User configurations based on the PRD."\</delegation\>
+\<verification\>Verify \`schema.prisma\` correctly maps the abstract core state. The Project Auditor MUST confirm this file physically exists and contains the models before proceeding. \-\> ACTION: Create Git Commit.\</verification\>
 \</rule\>
 
-\<rule id="3" name="Decoupled\_Compiler"\>
-  \<delegation\>Delegate to Logic Worker: "Implement the Dual-Compiler Engine (Markdown/XML) purely in TypeScript."\</delegation\>
-  \<verification\>Verify compiler engine is a pure utility (\`src/utils/compiler.ts\`) decoupled from React, executing instantly on the client. \-\> ACTION: Create Git Commit.\</verification\>
+\<rule id="3" name="Decoupled_Compiler"\>
+\<delegation\>Delegate to Logic Worker: "Implement the Dual-Compiler Engine (Markdown/XML) purely in TypeScript."\</delegation\>
+\<verification\>Verify compiler engine is a pure utility (\`src/utils/compiler.ts\`) decoupled from React, executing instantly on the client. \-\> ACTION: Create Git Commit.\</verification\>
 \</rule\>
 
-\<rule id="4" name="Component\_Delegation"\>
-  \<delegation\>Delegate to Frontend Worker: "Build the Split-Pane UI with shadcn/ui and connect to Zustand."\</delegation\>
-  \<verification\>Verify components are strictly typed, use 'use client' appropriately, and match NFR-2.2. \-\> ACTION: Create Git Commit.\</verification\>
+\<rule id="4" name="Component_Delegation"\>
+\<delegation\>Delegate to Frontend Worker: "Build the Split-Pane UI with shadcn/ui and connect to Zustand."\</delegation\>
+\<verification\>Verify components are strictly typed, use 'use client' appropriately, and match NFR-2.2. \-\> ACTION: Create Git Commit.\</verification\>
 \</rule\>
 
-\<rule id="5" name="Integration\_and\_Persistence"\>
-  \<delegation\>Delegate to Fullstack Worker: "Implement Server Actions to sync Zustand state with PostgreSQL via Prisma."\</delegation\>
-  \<verification\>Verify Optimistic UI updates are used, hiding database latency from the user. \-\> ACTION: Create Git Commit.\</verification\>
+\<rule id="5" name="Integration_and_Persistence"\>
+\<delegation\>Delegate to Fullstack Worker: "Implement Server Actions to sync Zustand state with PostgreSQL via Prisma."\</delegation\>
+\<verification\>Verify Optimistic UI updates are used, hiding database latency from the user. \-\> ACTION: Create Git Commit.\</verification\>
 \</rule\>
 
-\</delegation\_and\_verification\_rules\>
+\</delegation_and_verification_rules\>
 
-\<execution\_workflow\>
+\<execution_workflow\>
 
-\<step order="1"\>Trigger Rule 1 (DevOps\_First) \- Setup Docker & Git Environment.\</step\>
+\<step order="1"\>Trigger Rule 1 (DevOps_First) \- Setup Docker & Git Environment.\</step\>
 
-\<step order="2"\>Trigger Rule 2 (Schema\_Driven\_Development) \- Define DB Models.\</step\>
+\<step order="2"\>Trigger Rule 2 (Schema_Driven_Development) \- Define DB Models.\</step\>
 
-\<step order="3"\>Trigger Rule 3 (Decoupled\_Compiler) \- Build business logic.\</step\>
+\<step order="3"\>Trigger Rule 3 (Decoupled_Compiler) \- Build business logic.\</step\>
 
-\<step order="4"\>Trigger Rule 4 (Component\_Delegation) \- Build IDE interface.\</step\>
+\<step order="4"\>Trigger Rule 4 (Component_Delegation) \- Build IDE interface.\</step\>
 
-\<step order="5"\>Trigger Rule 5 (Integration\_and\_Persistence) \- Connect DB.\</step\>
+\<step order="5"\>Trigger Rule 5 (Integration_and_Persistence) \- Connect DB.\</step\>
 
-\</execution\_workflow\>
+\</execution_workflow\>
 
-\</agent\_configuration\>
+\</agent_configuration\>
