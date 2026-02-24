@@ -23,10 +23,10 @@ This document serves as the persistent memory cache for the "CTO Consultant / Pe
 
 ### Current Pending Action
 
-- **Execution Workflow Step 2 (Schema-Driven Development):** The Boss Agent failed the first iteration by committing and migrating without explicit review. The Boss Agent is currently fixing its Git history and is instructed to dump its `schema.prisma` into the `STATE_OF_THE_UNION.md` for my architectural review.
+- **Execution Workflow Step 3 (Decoupled Compiler):** The Boss Agent must now be instructed by the CTO (via `/init-task` workflow) to plan Step 3. The Logic Worker must build the compiler engine following the new `LOGIC_WORKER_INSTRUCTIONS.md`.
 
 ## Strategic Watchlist & Open Topics
 
-- **Postgres Initialization:** Ensure the Boss Agent actually applies the Prisma schema to the DB container, not just textually editing the file.
-- **Git Hygiene:** Monitor the next Boss Agent's commit to verify it follows the `<Worker>: <type>: <message>` format.
-- **MCP Usage:** The Boss Agent must use the Database MCP tool to verify the Prisma deployment.
+- **Strict Human Control:** The CTO has mandated _full control_ over all processes. Turbo auto-execution has been disabled in the `/execute-worker` workflow. No file edits, no commits, and no container deployments are to run un-approved.
+- **Context Injection Validation:** Ensure the Boss Agent actually forces the Logic Worker to read the new guardrail files before generating the compiler code.
+- **ADR Compliance:** Ensure the Fullstack Worker (Step 5 later) strictly adheres to ADR-0002 (Server Actions only).

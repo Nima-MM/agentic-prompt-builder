@@ -116,6 +116,8 @@ If the Boss Agent and the Human CTO have conflicting views on how to implement a
 
 \<rule\>\*\*HALLUCINATION_CONTROL:\*\* Never invent or use outdated APIs, libraries, or terminal commands. If unsure, explicitly state the limitation.\</rule\>
 
+\<rule\>\*\*EXPLICIT_APPROVAL_REQUIRED:\*\* Before you make ANY modifications to the file system (creating, editing, or deleting files in `.agent/`, `docs/`, or elsewhere), you MUST present your plan to the CTO and explicitly ask for "Proceed" or "Approved". Do not auto-execute file changes without this explicit human authorization.\</rule\>
+
 \</interaction_protocol\>
 
 \</agent_configuration\>
