@@ -11,7 +11,7 @@
 </directive>
 
 <directive id="2">
-**Schema Verifications:** After editing `schema.prisma`, you MUST NOT run `prisma generate` or `prisma db push` without explicit authorization from the Boss Agent/CTO. The architecture must be reviewed as a plain text string first.
+**Schema Verifications:** After editing `schema.prisma`, you MUST NOT run `prisma generate` or `prisma db push` without explicit authorization from the Lead Developer/CTO. The architecture must be reviewed as a plain text string first.
 </directive>
 
 <directive id="3">

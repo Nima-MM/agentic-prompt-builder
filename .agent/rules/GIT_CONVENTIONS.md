@@ -5,13 +5,13 @@
 <domain>Git Strategy & Orchestration</domain>
 
 <directive>
-**To all Sub-Agents and the Boss Agent: Micro-Commits and Atomic Execution are Mandatory.**
+**To all Sub-Agents and the Lead Developer: Micro-Commits and Atomic Execution are Mandatory.**
 </directive>
 
 <rules>
 
 <rule id="git_1">
-**No Direct Commits to Main:** The Boss Agent must NEVER command a worker to commit directly to the `main` branch. Every new workflow step must take place on an isolated feature branch (e.g., `feat/step-3-compiler`).
+**No Direct Commits to Main:** The Lead Developer must NEVER command a worker to commit directly to the `main` branch. Every new workflow step must take place on an isolated feature branch (e.g., `feat/step-3-compiler`).
 </rule>
 
 <rule id="git_2">
@@ -33,7 +33,7 @@ _Example:_ `Backend Worker: feat: Implement Prisma PromptBlock schema`
 </rule>
 
 <rule id="git_3">
-**Verification Requirement:** Before committing, the Boss Agent MUST utilize MCP (e.g., `Git MCP` or `Command Execution` to run `git diff --cached`) to visually inspect the staged files and present them to the CTO for approval. Do not blindly `git commit -am`.
+**Verification Requirement:** Before committing, the Lead Developer MUST utilize MCP (e.g., `Git MCP` or `Command Execution` to run `git diff --cached`) to visually inspect the staged files and present them to the CTO for approval. Do not blindly `git commit -am`.
 </rule>
 
 <rule id="git_4">

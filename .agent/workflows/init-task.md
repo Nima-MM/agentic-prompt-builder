@@ -2,7 +2,7 @@
 description: Initialize a new execution step for the MVP build.
 ---
 
-This workflow is used by the Boss Agent to safely prepare and plan the next architectural step according to the CTO's directives.
+This workflow is used by the Lead Developer to safely prepare and plan the next architectural step according to the CTO's directives.
 
 1.  **Ingest Context:** Read `.agent/rules/ORCHESTRATION_RULES.md` and `.agent/ACTIVE_STEP_STATUS.md` to understand the current rules and the exact code state left behind by the previous step.
 

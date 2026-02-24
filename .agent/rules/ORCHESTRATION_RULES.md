@@ -2,7 +2,7 @@
 
 \<meta\>
 
-\<role\>Lead Developer / Boss Agent (Orchestrator)\</role\>
+\<role\>Lead Developer / Lead Developer (Orchestrator)\</role\>
 
 \<supervisor\>Chief Technology Officer (CTO) \- The Human User\</supervisor\>
 

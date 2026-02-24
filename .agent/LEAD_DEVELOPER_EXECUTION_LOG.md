@@ -1,6 +1,6 @@
-# Orchestrator (Boss Agent) - Long Term Memory Log
+# Orchestrator (Lead Developer) - Long Term Memory Log
 
-**Purpose:** This file acts as the private and continuous journal for the Orchestrator / Boss Agent. Unlike the `ACTIVE_STEP_STATUS.md` which is a snapshot meant for the CTO's immediate review, this file is an append-only log of experiences, blockers, learned lessons, and historical execution records.
+**Purpose:** This file acts as the private and continuous journal for the Orchestrator / Lead Developer. Unlike the `ACTIVE_STEP_STATUS.md` which is a snapshot meant for the CTO's immediate review, this file is an append-only log of experiences, blockers, learned lessons, and historical execution records.
 
 ---
 
@@ -29,5 +29,5 @@
 
 ---
 
-**MANDATE FOR THE BOSS AGENT:**
+**MANDATE FOR THE Lead Developer:**
 _At the successful end of every `/execute-worker` workflow execution, you MUST append a new entry to this document under the current Phase/Step. You must honestly log what was done, what errors were encountered (even if fixed), and any technical lessons learned that might help in future steps._

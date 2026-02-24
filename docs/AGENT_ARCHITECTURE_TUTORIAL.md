@@ -24,24 +24,24 @@ If `docs/` is the blueprint, `.agent/` is the management system. This folder con
 
 AI agents need strict boundaries, otherwise, they write inconsistent code.
 
-- **`ORCHESTRATION_RULES.md` & `AGENT_COMMUNICATION.md`:** These define the "Chain of Command." The Human CTO is at the top. The "Boss Agent" manages the project but must ask for permission before modifying the file system. Agents are not allowed to prompt each other directly.
+- **`ORCHESTRATION_RULES.md` & `AGENT_COMMUNICATION.md`:** These define the "Chain of Command." The Human CTO is at the top. The "Lead Developer" manages the project but must ask for permission before modifying the file system. Agents are not allowed to prompt each other directly.
 - **`TECH_STACK.md` & `GIT_CONVENTIONS.md`:** Enforces exactly which technologies the AI can use (Next.js, Tailwind, Prisma) and how it must save its work (using Git feature branches).
-- **Worker Instructions (e.g., `FRONTEND_WORKER_INSTRUCTIONS.md`, `LOGIC_WORKER...`):** We don't use one giant AI for everything. The Boss Agent delegates tasks to specialized "Sub-Agents." These files are their job descriptions. For example, the Logic Worker is strictly forbidden from using React so it writes pure, fast backend code.
+- **Worker Instructions (e.g., `FRONTEND_WORKER_INSTRUCTIONS.md`, `LOGIC_WORKER...`):** We don't use one giant AI for everything. The Lead Developer delegates tasks to specialized "Sub-Agents." These files are their job descriptions. For example, the Logic Worker is strictly forbidden from using React so it writes pure, fast backend code.
 
 ### 💾 B. The Memory System (Root of `.agent/`)
 
 Because AI chats eventually lose context, we force the AI to write its memories into the file system.
 
-- **`ACTIVE_STEP_STATUS.md`:** The instantaneous "status report." Before the Boss Agent asks you for permission to proceed, it must write exactly what it just built and where the code is located into this file.
+- **`ACTIVE_STEP_STATUS.md`:** The instantaneous "status report." Before the Lead Developer asks you for permission to proceed, it must write exactly what it just built and where the code is located into this file.
 - **`CONSULTANT_ACTIVE_MEMORY.md`:** The private memory of the CTO Consultant (an auditing AI). It tracks where the project is and what risks to watch out for.
 - **`PROJECT_AUDIT_LOG.md`:** The long-term, overarching architectural history. Useful for humans conducting compliance reviews after the project is done.
-- **`BOSS_EXECUTION_LOG.md`:** The private diary of the Boss Agent. It logs every task it completed, the errors it made, and what it learned.
+- **`LEAD_DEVELOPER_EXECUTION_LOG.md`:** The private diary of the Lead Developer. It logs every task it completed, the errors it made, and what it learned.
 
 ### ⚙️ C. The Automation (`.agent/workflows/`)
 
 To save the Human CTO from typing massive instructions repeatedly, we use Antigravity IDE `/workflows`.
 
-- **`init-task.md`:** When you type `/init-task` in the chat, the IDE automatically forces the Boss Agent to read the rules, look at the MVP spec, propose a plan for the next feature, and suggest a Git branch.
+- **`init-task.md`:** When you type `/init-task` in the chat, the IDE automatically forces the Lead Developer to read the rules, look at the MVP spec, propose a plan for the next feature, and suggest a Git branch.
 - **`execute-worker.md`:** When you type `/execute-worker`, the IDE automatically checks out the Git branch, injects the worker instructions into the AI, generates the code, updates the memory logs, and prepares a Git commit for your review.
 
 ---
@@ -51,7 +51,7 @@ To save the Human CTO from typing massive instructions repeatedly, we use Antigr
 **How you build software here:**
 
 1. You trigger `/init-task "Step X: Feature Name"`.
-2. The Boss Agent reads `.agent/rules/` and `docs/`, then proposes a plan.
+2. The Lead Developer reads `.agent/rules/` and `docs/`, then proposes a plan.
 3. You review the plan. If good, you type `/execute-worker`.
 4. The AI writes code on a new Git branch and updates `ACTIVE_STEP_STATUS.md`.
 5. You review the code. If good, you merge the branch to `main`.

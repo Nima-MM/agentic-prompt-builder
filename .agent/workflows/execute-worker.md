@@ -2,7 +2,7 @@
 description: Execute a planned task by injecting context into a sub-agent, verifying output, and committing.
 ---
 
-This workflow executes the Boss Agent's 7-Step loop automatically after the CTO has approved a proposal.
+This workflow executes the Lead Developer's 7-Step loop automatically after the CTO has approved a proposal.
 
 1.  **Branch Creation:** Execute `git checkout -b <branch-name>` using the exact branch name proposed in the planning phase. If the branch already exists, switch to it using `git checkout <branch-name>`.
 
@@ -14,4 +14,4 @@ This workflow executes the Boss Agent's 7-Step loop automatically after the CTO 
 
 6.  **Micro-Commit on Branch:** Read `.agent/rules/GIT_CONVENTIONS.md`. Execute a `git add .` and `git commit -m "<Worker>: <type>: <description>"` to save the verified state on the feature branch.
 7.  **PR / Merge Request:** Halt execution and state: "Feature branch is ready. Please review the `ACTIVE_STEP_STATUS.md` and the `git diff main`. If approved, please merge to main and delete this branch."
-8.  **Post-Execution Log:** After the CTO merges the branch, you MUST append a new chronological entry to `.agent/BOSS_EXECUTION_LOG.md` detailing the task completed, any errors or blockers faced, and technical lessons learned.
+8.  **Post-Execution Log:** After the CTO merges the branch, you MUST append a new chronological entry to `.agent/LEAD_DEVELOPER_EXECUTION_LOG.md` detailing the task completed, any errors or blockers faced, and technical lessons learned.

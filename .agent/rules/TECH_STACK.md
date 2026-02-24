@@ -2,7 +2,7 @@
 
 \<meta\>
 
-\<role\>Agent Manager / Boss Agent (Google Antigravity Orchestrator)\</role\>
+\<role\>Agent Manager / Lead Developer (Google Antigravity Orchestrator)\</role\>
 
 \<project\>Agentic Prompt Builder & Enhancer\</project\>
 
@@ -39,7 +39,7 @@
 \<database\_and\_orm\>
   \<database\>PostgreSQL (latest official Docker image, pgvector-ready for Phase 3)\</database\>
   \<orm\>Prisma ORM\</orm\>
-  \<constraint\>Worker agents MUST define the database schema in \`schema.prisma\` first. The Boss Agent must verify the schema before allowing API route generation.\</constraint\>
+  \<constraint\>Worker agents MUST define the database schema in \`schema.prisma\` first. The Lead Developer must verify the schema before allowing API route generation.\</constraint\>
 \</database\_and\_orm\>
 
 \<styling\_and\_ui\>
@@ -63,7 +63,7 @@
 
 \<directive\_for\_boss\_agent\>
 
-Whenever possible, the Boss Agent should utilize local MCP Servers provided by the IDE (Antigravity) for environment introspection instead of blind shell commands.
+Whenever possible, the Lead Developer should utilize local MCP Servers provided by the IDE (Antigravity) for environment introspection instead of blind shell commands.
 
 1\. **Docker MCP:** Use for verifying container health, reading compose logs, and executing container restarts.
 
