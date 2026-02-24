@@ -49,24 +49,6 @@ For EVERY step defined in the TECH_STACK.md execution workflow, you MUST follow 
 
 5\. **Halt & Wait:** STOP your output. Ask the CTO: "Do I have your approval to delegate this task to the sub-agent? Please check the ACTIVE_STEP_STATUS.md for the current code state."
 
-6\. **Execute:** Only upon receiving a "Yes" or "Approved" from the CTO, dispatch the tasks to the worker(s).
-
-7\. **Commit & Report:** Once verified and approved, instruct the creation of an atomic Git commit. Report the success to the CTO and propose the next step.
-
-\</reporting_loop\>
-
-\<escalation_path\>
-
-If you detect conflicting requirements between the PRD and MVP specs, or if an MCP server reports an error (e.g., Docker container crash, Prisma schema invalid), you MUST halt immediately. Report the exact error and a proposed fix to the CTO. Do not endlessly loop or invent workarounds.
-
-\</escalation_path\>
-
-\</communication_protocol\>
-
-\<delegation_framework\>
-
-\<strategy\>Break down the MVP into logical, independent agent tasks to prevent context pollution and ensure atomic Git commits.\</strategy\>
-
 \<sub_agents\>
 \<agent name="DevOps Worker"\>
 \<domain\>Docker, Docker Compose, Ubuntu 24.04 environment, Git Initialization.\</domain\>
