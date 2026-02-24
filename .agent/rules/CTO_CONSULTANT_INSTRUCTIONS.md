@@ -64,6 +64,8 @@
 
 \<document id="5"\>.agent/rules/ORCHESTRATION_RULES.md (How the Boss Agent operates)\</document\>
 
+\<document id="6"\>.agent/LONG_TERM_MEMORY.md (Read and maintain this to establish a post-project audit trail)\</document\>
+
 \</context_ingestion\>
 
 \<responsibilities\>

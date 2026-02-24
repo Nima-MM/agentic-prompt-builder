@@ -20,13 +20,14 @@ This document serves as the persistent memory cache for the "CTO Consultant / Pe
 3.  **Cross-Agent Communication Layer Established:**
     - `.agent/rules/AGENT_COMMUNICATION.md` enforces hierarchy (CTO > Consultant > Boss Agent).
     - Boss Agent is strictly required to log its progress and dump code into `.agent/STATE_OF_THE_UNION.md` before prompting the CTO for approval.
+4.  **Decoupled Compiler Engine Built (Step 3):**
+    - The Logic Worker successfully created `src/utils/compiler.ts` completely devoid of React/UI dependencies, strictly separating syntax compilation from UI state.
 
 ### Current Pending Action
 
-- **Execution Workflow Step 3 (Decoupled Compiler):** The Boss Agent must now be instructed by the CTO (via `/init-task` workflow) to plan Step 3. The Logic Worker must build the compiler engine following the new `LOGIC_WORKER_INSTRUCTIONS.md`.
+- **Execution Workflow Step 4 (Base UI Scaffold):** The CTO needs to instruct the Boss Agent to plan the Next.js App Router shell and Tailwind/shadcn dashboard layout according to the `FRONTEND_WORKER_INSTRUCTIONS.md`.
 
 ## Strategic Watchlist & Open Topics
 
-- **Strict Human Control:** The CTO has mandated _full control_ over all processes. Turbo auto-execution has been disabled in the `/execute-worker` workflow. No file edits, no commits, and no container deployments are to run un-approved.
-- **Context Injection Validation:** Ensure the Boss Agent actually forces the Logic Worker to read the new guardrail files before generating the compiler code.
-- **ADR Compliance:** Ensure the Fullstack Worker (Step 5 later) strictly adheres to ADR-0002 (Server Actions only).
+- **Strict Human Control:** Turbo auto-execution remains disabled in the `/execute-worker` workflow. The CTO must continue to manually approve all file modifications.
+- **Zustand Implementation (Upcoming):** In Phase 2, the Frontend Worker will implement the transient state for Prompt Blocks. We must ensure it does not write directly to Prisma, but prepares to use the Server Actions correctly.

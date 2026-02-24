@@ -14,3 +14,4 @@ This workflow executes the Boss Agent's 7-Step loop automatically after the CTO 
 
 6.  **Micro-Commit on Branch:** Read `.agent/rules/GIT_CONVENTIONS.md`. Execute a `git add .` and `git commit -m "<Worker>: <type>: <description>"` to save the verified state on the feature branch.
 7.  **PR / Merge Request:** Halt execution and state: "Feature branch is ready. Please review the `STATE_OF_THE_UNION.md` and the `git diff main`. If approved, please merge to main and delete this branch."
+8.  **Post-Execution Log:** After the CTO merges the branch, you MUST append a new chronological entry to `.agent/BOSS_LONG_TERM_MEMORY.md` detailing the task completed, any errors or blockers faced, and technical lessons learned.
