@@ -11,20 +11,20 @@ This document serves as the persistent memory cache for the "CTO Consultant / Pe
 ### Completed
 
 1.  **DevOps Setup (Phase 1):** `docker-compose.yml` and `Dockerfile` are created (Next.js + Postgres 16).
-2.  **Architecture Rules & Audits:** Decoupled Compiler Engine is documented. `PROJECT_AUDITOR` is implemented to prevent memory-reality desyncs. The `/audit-system` workflow is active.
+2.  **Architecture Rules & Audits:** Decoupled Compiler Engine is documented. `PROJECT_AUDITOR` is implemented to prevent memory-reality desyncs. The `/audit-system` workflow is active. Orchestrator pipelines hardened with NFC/PFC flow constraints.
 3.  **Decoupled Compiler Engine Built (Step 3):** The logic for generating PRD output formats exists in `src/utils/compiler.ts`.
+4.  **UI/UX Liaison (Design-First):** `UI_UX_SPEC.md` created with Material Design 3 guidelines optimized for Desktop/Notebook.
 
 ### CRITICAL DESYNC (FAILED STEPS)
 
 - **Step 2 (Prisma Schema):** The Lead Developer's logs claim the schema is done, but the `schema.prisma` file is **EMPTY**. This must be rectified before building UI or Server Actions.
-- **Phase 2.5 (QA Setup):** Testing frameworks (`jest`, Playwright) are missing from `package.json` despite the QA-Workers being instructed to use them.
+- **Phase 2.5 (QA Setup):** Testing frameworks (`jest`, Playwright) and critical UI dependencies (`zustand`, `shadcn/ui`, etc.) are missing from `package.json` despite the QA-Workers/Frontend workers needing them.
 
 ### Current Pending Action
 
-The CTO must instruct the Lead Developer (via `/init-task`) to execute TWO immediate remediation tasks before proceeding with the normal Tech Stack flow:
+The CTO must instruct the Lead Developer (via `/init-task`) to wake up and execute the following remediation task-chain using the newly hardened NFC/PFC pipelines:
 
-1.  **Fix Prisma Schema:** Orchestrate the `DB Manager` to definitively write `schema.prisma`. Verify with the `Project Auditor`.
-2.  **DevOps QA Installation:** Orchestrate the `DevOps Worker` to install Jest and Playwright dependencies into the Node environment.
+`"Achtung Lead Developer: Ein System-Audit hat ergeben, dass dein letzter Kenntnisstand veraltet ist. Step 2 (Prisma Schema) ist physisch leer. Du MUSST folgende Task-Kette sofort als neues Milestone-Ziel ausführen: 1) Beauftrage den DevOps Worker mit der Installation der für künftige Phasen fehlenden Pakete ('zustand', 'lucide-react', 'clsx', 'tailwind-merge', 'class-variance-authority', 'jest' und 'playwright'). 2) Lasse den DevOps Worker 'npx shadcn@latest init' ausführen. 3) Beauftrage den DB Manager, die leere schema.prisma anhand der PRD neu zu schreiben. Vertraue auf deine neue QA-Dependency Pipeline für Retries."`
 
 ## Strategic Watchlist
 

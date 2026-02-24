@@ -9,7 +9,7 @@
 
 ## 🎨 Global Aesthetics
 
-- **Vibe:** Google Workspace style. Clean, spacious, light mode. Elevated surfaces with soft shadows and highly legible layouts.
+- **Vibe:** Google Workspace style. Clean, spacious, light mode. Elevated surfaces with soft shadows and highly legible layouts. **Desktop/Notebook Optimized:** High information density. Do not compromise the desktop layout for mobile responsiveness (Mobile is explicitly out-of-scope for this IDE).
 - **Primary Colors:** Material You dynamic pastel tones. E.g., Soft Blue (`#e3f2fd` to `#2196f3`) for primary actions, subtle Mint Green (`#e8f5e9`) for success contexts. Background should be off-white/very light gray (e.g., `#f8f9fa`) to let elevated white cards pop.
 - **Typography:** `Roboto` or `Google Sans` (Inter is an acceptable fallback) for UI. `Fira Code` strictly for code blocks.
 - **Shapes:** Soft rounded corners on all M3 Cards (e.g., `rounded-2xl` for main panels, `rounded-xl` for inner blocks).
