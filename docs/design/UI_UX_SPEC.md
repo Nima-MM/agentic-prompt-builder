@@ -1,6 +1,6 @@
-# UI/UX Specification (Frontend Blueprint) - Draft 2: Material Design 3
+# UI/UX Specification (Frontend Blueprint) - Draft 3: MD1 & Bootstrap Hybrid
 
-**Purpose:** This document translates the Human CTO's request for a Google Material Design 3 aesthetic into strict frontend specifications.
+**Purpose:** This document translates the Human CTO's request for a classic Material Design 1 and Bootstrap layout (with adaptive MD4 concepts) into strict frontend specifications for the worker agents.
 
 > [!NOTE]
 > The Orchestrator MUST force the Frontend Worker to read this file before generating React components.
@@ -9,36 +9,37 @@
 
 ## 🎨 Global Aesthetics
 
-- **Vibe:** Google Workspace style. Clean, spacious, light mode. Elevated surfaces with soft shadows and highly legible layouts. **Desktop/Notebook Optimized:** High information density. Do not compromise the desktop layout for mobile responsiveness (Mobile is explicitly out-of-scope for this IDE).
-- **Primary Colors:** Material You dynamic pastel tones. E.g., Soft Blue (`#e3f2fd` to `#2196f3`) for primary actions, subtle Mint Green (`#e8f5e9`) for success contexts. Background should be off-white/very light gray (e.g., `#f8f9fa`) to let elevated white cards pop.
-- **Typography:** `Roboto` or `Google Sans` (Inter is an acceptable fallback) for UI. `Fira Code` strictly for code blocks.
-- **Shapes:** Soft rounded corners on all M3 Cards (e.g., `rounded-2xl` for main panels, `rounded-xl` for inner blocks).
+- **Vibe:** Classic Google Cloud Platform / Solid SaaS structure. Distinct, crisp elevated surfaces. Highly adaptive and responsive layout (fluid down to mobile if necessary, though desktop is primary). We are dropping "dense desktop-only" constraints in favor of a clean, responsive web application structure.
+- **Primary Colors:** Bootstrap-style or classic MD1 solid colors. Primary Action Blue (`#1976d2` or `#0d6efd`), clean white cards (`#ffffff`), set against a light gray background (`#f3f4f6` or `#f8f9fa`).
+- **Typography:** `Roboto` system stack. Standard, legible font sizes. Editor blocks use `Fira Code`.
+- **Shapes:** Moderate rounding. Use `rounded-md` or `rounded-lg` max. Avoid the extreme pill-shapes of M3.
 
 ## 🧩 Required shadcn/ui Primitives
 
 _List of components the DevOps worker must run `npx shadcn@latest add ...` for before frontend work begins:_
 
-- `resizable` (For the Split-Pane layout)
-- `scroll-area` (For the block editor and preview panes)
-- `card` (To contain individual Prompt Blocks - MUST use heavy rounded corners and subtle drop shadows)
-- `button` (Floating Action Button style, tonal buttons, ghost variants)
+- `resizable` (For the Split-Pane layout on desktop, stacking on mobile)
+- `scroll-area`
+- `card` (To contain individual Prompt Blocks - MUST use crisp MD1 drop shadows `shadow-md` and `rounded-md`)
+- `button` (Solid filled primary buttons, prominent secondary standard buttons)
 - `input` & `textarea`
 - `dropdown-menu`
-- `separator`
-- `tabs` (Material-style underline indicator for XML vs Markdown)
-- `badge` (For block type labels)
+- `toast` (For classic bottom-up notification alerts)
+- `tabs`
+- `badge`
 
-## 🏗️ Layout Specifications
+## 🏗️ Layout Specifications (Adaptive)
 
-_Machine-readable breakdown of the grid/flex structures (e.g., Split-Pane coordinates):_
+_Machine-readable breakdown of the grid/flex structures:_
 
-- **Global Shell:** 100vh, `flex-col`. A top app bar containing the Project Title, Breadcrumbs, and global actions (Deploy, Save, Settings).
-- **Below App Bar:** A two-column setup.
-- **Left Pane (Block Editor):** ~50% width. A spacious scrolling container. The 'Semantic Prompt Blocks' are stacked vertically. Each block is a highly rounded M3 Card with a soft background tint depending on its role (e.g., pastel blue for Instruction, pastel green for Context).
-- **Right Pane (Live Preview):** ~50% width. A `Tabs` component cleanly splitting Compiled XML (top) and Markdown Output (bottom or tabbed). It should look like an elevated white surface.
+- **Responsive Behavior:** The layout MUST be built with standard breakpoints (`md:`, `lg:`).
+- **Global Shell:** A classic top-navbar (`h-14` or `h-16`) spanning `w-full` with the logo and primary actions (Save, Deploy) on the right.
+- **Main Container:** Below the navbar, a responsive container. On Desktop (`lg`), it uses the Split-Pane setup. On Mobile (`< lg`), it stacks vertically (Editor on top, Preview on bottom).
+- **Left Pane (Block Editor):** The 'Semantic Prompt Blocks' stack vertically. Each block has a clear, solid top-border colored by category (e.g., Blue for Context, Green for Instruction).
+- **Right Pane (Live Preview):** A highly contrasted area (perhaps a darker background for the XML/Markdown preview to separate it from the white/grey editor).
 
 ## 🎬 Micro-Animations & Interactions
 
-- **Hover States:** Elevations increase (shadow grows) when hovering over Prompt Blocks.
-- **Transitions:** `ease-in-out` `duration-300` for all surface elevation changes.
-- **Ripples:** Standard Material ripple effect on buttons if possible (or standard shadcn opacity transition).
+- **Adaptive Transitions:** Fluid width/height changes when panels resize or stack.
+- **Hover States:** Slight upward translation (`-translate-y-1`) and shadow-intensity increase on cards.
+- **Snappiness:** Keep animations fast (150ms-200ms) to ensure it feels like a native tool.
