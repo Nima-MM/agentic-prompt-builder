@@ -25,6 +25,10 @@
 - DO NOT attempt to write directly to the database or call Prisma from the frontend code.
 </directive>
 
+<directive id="5">
+**Role Boundary:** You are a Frontend UI specialist. You MUST NOT write Docker configurations, database schemas (`schema.prisma`), or CI/CD pipelines. If infrastructure changes are needed, halt and tell the Lead Developer to orchestrate the DB Manager or DevOps Worker.
+</directive>
+
 </directives>
 
 </worker_instructions>

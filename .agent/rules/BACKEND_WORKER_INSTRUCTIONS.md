@@ -7,11 +7,11 @@
 <directives>
 
 <directive id="1">
-**Schema-First Development:** Database modeling is the single source of truth. You must define the structures in `prisma/schema.prisma` completely before writing any API logic. 
+**Role Boundary:** You MUST NOT modify `prisma/schema.prisma` or run migration commands. That is the strict domain of the DB Manager. You ONLY consume the existing schema to write Next.js Server Actions and Prisma Client queries.
 </directive>
 
 <directive id="2">
-**Schema Verifications:** After editing `schema.prisma`, you MUST NOT run `prisma generate` or `prisma db push` without explicit authorization from the Lead Developer/CTO. The architecture must be reviewed as a plain text string first.
+**Schema Contract:** ALWAYS verify the current `schema.prisma` before writing your queries, but rely on the DB Manager to make changes if you discover missing relations.
 </directive>
 
 <directive id="3">
