@@ -29,3 +29,4 @@ The CTO must instruct the Lead Developer (via `/init-task`) to execute TWO immed
 ## Strategic Watchlist
 
 - **Strict Human Control:** The Project Auditor now technically blocks hallucinations, but the CTO must manually confirm every `ACTIVE_STEP_STATUS`.
+- **Lead Developer State Timeline:** The Lead Developer's tracking files (`LEAD_DEVELOPER_EXECUTION_LOG.md` and `ACTIVE_STEP_STATUS.md`) currently reflect a past, pre-audit reality. They are not actively "halluzinating", but simply "paused" in the timeline before the empty Prisma schema was discovered. Their state will be re-synchronized upon the next `/init-task` when we inject the new context.
