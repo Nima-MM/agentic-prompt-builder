@@ -10,4 +10,6 @@ This workflow is used by the Boss Agent to safely prepare and plan the next arch
 
 3.  **Propose Plan:** Output a detailed step-by-step plan on how to build this feature. Specify exactly which sub-agent (Worker) will be tasked.
 
-4.  **Halt for Approval:** Stop execution and ask the CTO: "This is my plan for the next step. Do I have your approval to proceed? If yes, please trigger `/execute-worker`."
+4.  **Branch Generation:** Propose a specific Git branch name for this task following the format `feat/step-<number>-<short-description>`. Explicity state: "We will execute this on branch: `<branch-name>`".
+
+5.  **Halt for Approval:** Stop execution and ask the CTO: "This is my plan for the next step. Do I have your approval to proceed on the proposed branch? If yes, please trigger `/execute-worker`."

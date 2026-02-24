@@ -2,18 +2,17 @@
 
 ## Current Milestone
 
-Step 2: Schema_Driven_Development (Backend/Schema Worker)
+Step 3: Decoupled_Compiler (Logic Worker)
 
 ## Status
 
-- Prisma ORM installed and initialized in Docker container.
-- `schema.prisma` drafted based on MVP abstract core state requirements.
-- Initial migrations successfully run and applied to the local PostgreSQL database.
+- Created `src/utils/compiler.ts` as a pure TypeScript utility.
+- Implemented `compilePrompt` function handling 'markdown', 'xml', and 'hybrid' modes exactly as specified in the PRD and MVP Spec.
+- Zero-latency client-side processing prepared for the UI.
 
 ## Blockers / Fixes Encountered
 
-- The `.agent/` directory was incorrectly ignored in Git, violating architecture rules. It has been restored, and only `toolbox` remains ignored. The `.gitignore` fix has been committed as a micro-commit.
-- The new 7-step Reporting Loop has been retroactively applied to Step 2, requiring this audit log and the new Context Injection step.
+- Docker root permissions on `src` folder caused a permission denied error when initializing the directory. Fixed by applying standard node user permissions via Docker.
 
 ## Context Injection Confirmation
 
@@ -21,39 +20,83 @@ Step 2: Schema_Driven_Development (Backend/Schema Worker)
 
 ## Code Dump (Critical Files Modified)
 
-### `prisma/schema.prisma`
+### `src/utils/compiler.ts`
 
-```prisma
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+```typescript
+export interface PromptBlock {
+  id: string;
+  type: string;
+  content: string;
+  isActive: boolean;
+  orderIndex: number;
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+export type CompileMode = "markdown" | "xml" | "hybrid";
+
+/**
+ * Escapes characters for pure XML mode.
+ */
+function escapeXml(unsafe: string): string {
+  return unsafe.replace(/[<>&'"]/g, (c) => {
+    switch (c) {
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case "&":
+        return "&amp;";
+      case "'":
+        return "&apos;";
+      case '"':
+        return "&quot;";
+      default:
+        return c;
+    }
+  });
 }
 
-model Prompt {
-  id        String        @id @default(uuid())
-  title     String        @default("Untitled Prompt")
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  blocks    PromptBlock[]
-}
+/**
+ * Compiles a list of PromptBlocks into a single string based on the chosen mode.
+ * Implements NFR-2.1 Zero-Latency pure client-side utility logic.
+ */
+export function compilePrompt(
+  blocks: PromptBlock[],
+  mode: CompileMode,
+): string {
+  // Sort and filter active blocks
+  const activeBlocks = blocks
+    .filter((b) => b.isActive)
+    .sort((a, b) => a.orderIndex - b.orderIndex);
 
-model PromptBlock {
-  id         String   @id @default(uuid())
-  promptId   String
-  orderIndex Int
-  type       String
-  content    String
-  isActive   Boolean  @default(true)
-  prompt     Prompt   @relation(fields: [promptId], references: [id], onDelete: Cascade)
+  switch (mode) {
+    case "markdown":
+      return activeBlocks
+        .map((b) => {
+          const typeUpper = b.type.toUpperCase();
+          return `## ${typeUpper}\n\n${b.content}`;
+        })
+        .join("\n\n---\n\n");
 
-  @@index([promptId, orderIndex])
+    case "xml":
+      return activeBlocks
+        .map((b) => {
+          const typeLower = b.type.toLowerCase().replace(/[^a-z0-9_-]/g, "_");
+          const escapedContent = escapeXml(b.content);
+          return `<${typeLower}>\n${escapedContent}\n</${typeLower}>`;
+        })
+        .join("\n\n");
+
+    case "hybrid":
+      return activeBlocks
+        .map((b) => {
+          const typeLower = b.type.toLowerCase().replace(/[^a-z0-9_-]/g, "_");
+          // In hybrid mode, XML tags specify structure, but content remains raw (e.g. Markdown)
+          return `<${typeLower}>\n${b.content}\n</${typeLower}>`;
+        })
+        .join("\n\n");
+
+    default:
+      return "";
+  }
 }
 ```

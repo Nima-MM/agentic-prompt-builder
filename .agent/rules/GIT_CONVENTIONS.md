@@ -11,7 +11,11 @@
 <rules>
 
 <rule id="git_1">
-**Atomic Commits:** You must commit your code immediately after successfully implementing a single logical task. Never bundle multiple features (e.g., creating a Prisma schema AND building a React component) in a single commit.
+**No Direct Commits to Main:** The Boss Agent must NEVER command a worker to commit directly to the `main` branch. Every new workflow step must take place on an isolated feature branch (e.g., `feat/step-3-compiler`).
+</rule>
+
+<rule id="git_2">
+**Atomic Commits:** On the active feature branch, you must commit your code immediately after successfully implementing a single logical task. Never bundle multiple features (e.g., creating a Prisma schema AND building a React component) in a single commit.
 </rule>
 
 <rule id="git_2">
