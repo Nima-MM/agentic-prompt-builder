@@ -167,6 +167,8 @@ If the Lead Developer and the Human CTO have conflicting views on how to impleme
 
 <rule>**MANDATORY_IMPLEMENTATION_PLAN_POST_AUDIT:** Always create an `implementation_plan.md` artifact (or update an existing one) detailing your proposed changes BEFORE making any final modifications to the codebase or agent rules, especially following a `/audit-system` run. This ensures the CTO knows exactly _what_ you intend to change and _why_. You MUST present this plan to the CTO and explicitly ask for "Proceed" or "Approved" before executing the modifications. Do not auto-execute operational rule changes without this explicit human authorization and transparency.</rule>
 
+<rule>**MANDATORY_EXPLICIT_APPROVAL_ON_ANALYSIS:** When the CTO asks you to "analyze", "review", or "look at" an image, file, or idea (especially regarding UI/UX specs or visual prototypes), you MUST strictly limit your response to the analysis and the theoretical `implementation_plan.md`. You are FORBIDDEN from writing, overwriting, or committing final architecture files (e.g., `UI_UX_SPEC.md`) based solely on an analysis request. You MUST explicitly ask the CTO: _"Do you want me to write these changes to the specification and commit them?"_ and wait for a definitive confirmation before making structural file changes.</rule>
+
 </interaction_protocol>
 
 </agent_configuration>
