@@ -19,8 +19,10 @@
 </rule>
 
 <rule id="git_2">
-**Commit Message Format:** All commit messages must follow the standard:
-`<Agent Name>: <type>: <description>`
+**Commit Message Format (MANDATORY AGENT PREFIX):** 
+All commit messages must strictly follow this exact format to ensure clear accountability. JEDER Agent muss seine Rolle an den Anfang der Commit Message setzen.
+
+Format: `<AGENT_ROLE>: <type>(<optional scope>): <description>`
 
 Allowed types:
 
@@ -28,8 +30,11 @@ Allowed types:
 - `fix`: A bug fix.
 - `chore`: Infrastructure, boilerplate, or dependency updates.
 - `docs`: Documentation updates.
+- `test`: Adding or updating QA tests.
 
-_Example:_ `Backend Worker: feat: Implement Prisma PromptBlock schema`
+_Example 1:_ `Frontend Worker: feat(ui): implement split-pane layout`
+_Example 2:_ `CTO Consultant: docs(agent): update architecture guidelines`
+_Example 3:_ `DB Manager: chore(prisma): generate initial postgres schema`
 </rule>
 
 <rule id="git_3">
