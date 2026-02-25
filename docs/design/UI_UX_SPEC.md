@@ -30,6 +30,7 @@ _List of components the DevOps worker must run `npx shadcn@latest add ...` for b
 - `separator`
 - `tabs`
 - `badge`
+- `select` (For the Format Selection Dropdown)
 
 ## 🏗️ Layout Specifications (Adaptive & Resizable)
 
@@ -40,6 +41,7 @@ _Machine-readable breakdown of the grid/flex structures based on the mockup and 
 - **Right Pane (Main Workspace):** Wrapping the second `<ResizablePanel>` (Default size ~75-80%). Pure white background.
   - **Header Area:** Large crisp title ("Prompt Templates") with secondary subtext and a primary Indigo Action Button ("+ New Template") aligned top-right.
   - **Workspace Editor (The Blocks):** The semantic prompt blocks are stacked vertically within a scroll area. Each block is a flat white `<Card>` with a 1px soft border. Text inside uses a monospace font. Action icons (Edit, Copy, Delete) are minimal, un-bordered icons pinned to the top-right of each card.
+  - **Conversion / Export Area (Bottom Right):** Located at the bottom right corner of the active workspace. This area contains a **Selection-Dropdown** for output formats (options: `XML`, `Markdown`, `Hybrid`) and a primary **Convert-Button** next to it.
 - **Granular Block Resizing:** Every `<textarea>` within a Prompt Block Card MUST have the standard CSS `resize-y` utility applied, allowing the user to dynamically adjust the block's height via a bottom-right grab handle.
 - **The Drag Handle:** Between the Left and Right panes, there MUST be a clean, minimalist `<ResizableHandle>`.
 
