@@ -77,7 +77,14 @@ Agentic pipelines (like QA checks) are essentially state machines.
 - **Negative Flow Completeness (NFC):** Every decision or testing node MUST explicitly define the "Failure Branch." If a QA agent rejects code, the instructions MUST state what happens next (e.g., retry, escalate, or halt). Pipelines without failure paths are rejected as architecturally incomplete.
 - **Positive Flow Completeness (PFC):** Similarly, when a QA check passes, the pipeline MUST explicitly state how the system resumes its main workflow.
 
-#### C. Bounded-Retry Loops (The "5-Try" Rule)
+#### C. QA Fast-Track (The Triviality Bypass)
+
+To optimize token consumption and prevent "Agentic Drag," the system implements a Triviality Bypass during the Verification phase:
+
+- **The Concept:** If the Lead Developer detects that a code change is strictly visual (e.g., updating a Tailwind class like `bg-red-500` to `bg-blue-500`) and contains no business logic or database schemas, it is authorized to bypass delegating to a QA worker.
+- **The Reality:** Instead of spinning up the Frontend QA Worker for a trivial CSS change, the Lead Developer performs a quick reality check via MCP and logs the step as `[FAST-TRACKED]` in the Active Step Status.
+
+#### D. Bounded-Retry Loops (The "5-Try" Rule)
 
 We never allow infinite `while(failed)` loops between agents.
 
