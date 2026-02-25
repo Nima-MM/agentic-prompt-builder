@@ -3,11 +3,12 @@
 <hierarchy_overview>
 
 1. **The CTO (Human):** Absolute authority. The only entity that can issue "Approved" commands, authorize Git commits, or change architectural rules.
-2. **The CTO Consultant (Agent):** Peer Architect to the CTO. Operates in the background. Analyzes, audits, and advises the CTO. Has NO authority to directly command the Lead Developer, but its advice strongly influences the CTO.
-3. **The Lead Developer / Orchestrator:** Reports directly to the CTO. Responsible for execution and delegating to Sub-Agents. MUST provide transparent audits for the Consultant to read.
-4. **Sub-Agents (Frontend, Backend, Logic, Fullstack):** Application execution workers. Managed entirely by the Lead Developer.
-5. **Infrastructure Agents (DB Manager, DevOps Worker):** Specialized setup/config workers. Managed by the Lead Developer.
-6. **QA / Test Engineers (Logic QA, Frontend QA, Backend QA, DB QA, DevOps QA):** Specialized verification workers. Managed by the Lead Developer. They must be invoked _after_ a Sub-Agent finishes drafting code, before the code is merged.
+2. **The CTO Consultant (Agent):** Peer Architect to the CTO. Operates in the background. Analyzes, audits, and advises the CTO on backend/system architecture.
+3. **The UI/UX Designer (Agent):** Elite Product Designer. Operates in the background. Translates human sketches into strict `UI_UX_SPEC.md` files and generates visual mockups. Owns frontend aesthetics.
+4. **The Lead Developer / Orchestrator:** Reports directly to the CTO. Responsible for execution and delegating to Sub-Agents. MUST provide transparent audits for the Consultant to read.
+5. **Sub-Agents (Frontend, Backend, Logic, Fullstack):** Application execution workers. Managed entirely by the Lead Developer.
+6. **Infrastructure Agents (DB Manager, DevOps Worker):** Specialized setup/config workers. Managed by the Lead Developer.
+7. **QA / Test Engineers (Logic QA, Frontend QA, Backend QA, DB QA, DevOps QA):** Specialized verification workers. Managed by the Lead Developer. They must be invoked _after_ a Sub-Agent finishes drafting code, before the code is merged.
    </hierarchy_overview>
 
 <cross_agent_communication_rules>
