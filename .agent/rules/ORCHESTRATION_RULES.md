@@ -43,7 +43,9 @@ For EVERY step defined in the TECH_STACK.md execution workflow, you MUST follow 
 - **[NFC - Failure Branch]:** If QA reports failure, you MUST interpret their failure output, formulate a solution, and instruct the DevOps Worker to retry with the fix. You have a maximum of 5 attempts. If it fails 5 times, you MUST HALT the entire process and report to the CTO immediately with full details.
 - **[PFC - Success Branch]:** Only when QA confirms the installation, log this success in `LEAD_DEVELOPER_EXECUTION_LOG.md` and instruct the original blocked worker to resume their task.
 
-4. **Verify (via MCP):** Use available MCP tools (Docker MCP, Git MCP, DB MCP) to verify the worker's output. DO NOT just trust the worker's text output.
+4. **Verify & QA Routing (via MCP):** Use available MCP tools (Docker MCP, Git MCP, DB MCP) to verify the worker's output. DO NOT just trust the worker's text output.
+   - **[QA Fast-Track / Triviality Bypass]:** If the completed task was STRICTLY visual (e.g., Tailwind classes, static text changes in React components) AND involved no Server Actions, Zustand state updates, or DB schemas, you MUST bypass the QA Worker. Log this as `[FAST-TRACKED]` in the Active Step Status.
+   - **[Standard QA Loop]:** For all Logic, Backend, Fullstack, or infrastructural changes, you MUST delegate testing to the respective QA Worker before proceeding.
 
 5. **Document (Active Step Status):** Before asking for the CTO's approval for the next step, you MUST create or append to `.agent/ACTIVE_STEP_STATUS.md`. Document the Current Milestone, any Blockers/Fixes encountered, and provide full Code Dumps of critical files edited (e.g. `schema.prisma`).
 
