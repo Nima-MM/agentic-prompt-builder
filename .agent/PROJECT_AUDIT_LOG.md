@@ -59,3 +59,8 @@
 
 **For the CTO Consultant:**
 After every completed MVP Step, you MUST append a new section to this `PROJECT_AUDIT_LOG.md` document detailing the step, the architectural decisions made, and any deviations or blockers encountered. This ensures a flawless post-mortem at the end of the project.
+
+## [2026-02-25] Orchestration Optimization: QA Fast-Track
+- **Auditor:** CTO Consultant
+- **Action:** Introduced the 'QA Fast-Track (Triviality Bypass)' heuristic into `ORCHESTRATION_RULES.md`.
+- **Reasoning:** To prevent 'Agentic Drag' and optimize token consumption, the Orchestrator is now authorized to bypass QA workers for strictly visual/trivial UI changes.
