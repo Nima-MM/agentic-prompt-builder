@@ -1,6 +1,6 @@
-# UI/UX Specification (Frontend Blueprint) - Draft 3: MD1 & Bootstrap Hybrid
+# UI/UX Specification (Frontend Blueprint) - Draft 5: Clean Modern (Notion/Apple Hybrid)
 
-**Purpose:** This document translates the Human CTO's request for a classic Material Design 1 and Bootstrap layout (with adaptive MD4 concepts) into strict frontend specifications for the worker agents.
+**Purpose:** This document translates the Human CTO's provided visual mockup into strict frontend specifications for the worker agents. The aesthetic is clean, flat, and highly legible, prioritizing subtle borders over heavy shadows.
 
 > [!NOTE]
 > The Orchestrator MUST force the Frontend Worker to read this file before generating React components.
@@ -9,37 +9,42 @@
 
 ## 🎨 Global Aesthetics
 
-- **Vibe:** Classic Google Cloud Platform / Solid SaaS structure. Distinct, crisp elevated surfaces. Highly adaptive and responsive layout (fluid down to mobile if necessary, though desktop is primary). We are dropping "dense desktop-only" constraints in favor of a clean, responsive web application structure.
-- **Primary Colors:** Bootstrap-style or classic MD1 solid colors. Primary Action Blue (`#1976d2` or `#0d6efd`), clean white cards (`#ffffff`), set against a light gray background (`#f3f4f6` or `#f8f9fa`).
-- **Typography:** `Roboto` system stack. Standard, legible font sizes. Editor blocks use `Fira Code`.
-- **Shapes:** Moderate rounding. Use `rounded-md` or `rounded-lg` max. Avoid the extreme pill-shapes of M3.
+- **Vibe:** "Notion meets Apple". Extremely clean, light mode. High information density but feels spacious due to padding. Distinct flat surfaces separated by subtle 1px borders rather than z-index elevations or heavy drop shadows.
+- **Primary Colors:**
+  - **Primary Action (Buttons, Active states):** Soft Indigo/Purple (`#6366f1` / `bg-indigo-500`).
+  - **Backgrounds:** Global App Background (`#f9fafb`), Sidebar Background (`#f9fafb`), Main Content / Cards (`#ffffff`).
+  - **Text:** Headings (`#111827`), Secondary Text (`#6b7280`).
+  - **Accents (Sidebar):** Small colored squares/dots (Orange, Cyan, Red, Purple, Yellow) for taxonomy.
+- **Typography:** `Inter` or `San Francisco` system stack for all UI text. `Fira Code` or `JetBrains Mono` strictly for Prompt/Code block contents within cards.
+- **Shapes:** Consistent, moderate rounding. Action buttons use `rounded-md`. Main cards/panels use `rounded-lg`. Avoid extreme pill-shapes.
 
 ## 🧩 Required shadcn/ui Primitives
 
 _List of components the DevOps worker must run `npx shadcn@latest add ...` for before frontend work begins:_
 
-- `resizable` (For the Split-Pane layout on desktop, stacking on mobile)
+- `resizable` (For the Split-Pane layout)
 - `scroll-area`
-- `card` (To contain individual Prompt Blocks - MUST use crisp MD1 drop shadows `shadow-md` and `rounded-md`)
-- `button` (Solid filled primary buttons, prominent secondary standard buttons)
+- `card` (To contain Prompt Blocks - MUST use subtle borders `border-slate-200`, pure white background, and NO drop-shadows `shadow-none`)
+- `button` (Solid indigo for primary, subtle ghost/icon variants for edit/delete actions)
 - `input` & `textarea`
-- `dropdown-menu`
-- `toast` (For classic bottom-up notification alerts)
+- `separator`
 - `tabs`
 - `badge`
 
-## 🏗️ Layout Specifications (Adaptive)
+## 🏗️ Layout Specifications (Adaptive & Resizable)
 
-_Machine-readable breakdown of the grid/flex structures:_
+_Machine-readable breakdown of the grid/flex structures based on the mockup and system reqs:_
 
-- **Responsive Behavior:** The layout MUST be built with standard breakpoints (`md:`, `lg:`).
-- **Global Shell:** A classic top-navbar (`h-14` or `h-16`) spanning `w-full` with the logo and primary actions (Save, Deploy) on the right.
-- **Main Container:** Below the navbar, a responsive container. On Desktop (`lg`), it uses the Split-Pane setup. On Mobile (`< lg`), it stacks vertically (Editor on top, Preview on bottom).
-- **Left Pane (Block Editor):** The 'Semantic Prompt Blocks' stack vertically. Each block has a clear, solid top-border colored by category (e.g., Blue for Context, Green for Instruction).
-- **Right Pane (Live Preview):** A highly contrasted area (perhaps a darker background for the XML/Markdown preview to separate it from the white/grey editor).
+- **Main Container:** A 100vh full-screen web app. It MUST use the `shadcn/ui` `<ResizablePanelGroup>` setup horizontally.
+- **Left Pane (Sidebar/Navigation):** Wrapping the first `<ResizablePanel>` (Default size ~20-25%). Light gray background. Contains logo/back-arrow, categorized navigation links ("Personal settings", "Graphs") with minimalist icons (Lucide Icons) and taxonomy dots. Active states have a very subtle gray highlight and indigo text.
+- **Right Pane (Main Workspace):** Wrapping the second `<ResizablePanel>` (Default size ~75-80%). Pure white background.
+  - **Header Area:** Large crisp title ("Prompt Templates") with secondary subtext and a primary Indigo Action Button ("+ New Template") aligned top-right.
+  - **Workspace Editor (The Blocks):** The semantic prompt blocks are stacked vertically within a scroll area. Each block is a flat white `<Card>` with a 1px soft border. Text inside uses a monospace font. Action icons (Edit, Copy, Delete) are minimal, un-bordered icons pinned to the top-right of each card.
+- **Granular Block Resizing:** Every `<textarea>` within a Prompt Block Card MUST have the standard CSS `resize-y` utility applied, allowing the user to dynamically adjust the block's height via a bottom-right grab handle.
+- **The Drag Handle:** Between the Left and Right panes, there MUST be a clean, minimalist `<ResizableHandle>`.
 
 ## 🎬 Micro-Animations & Interactions
 
-- **Adaptive Transitions:** Fluid width/height changes when panels resize or stack.
-- **Hover States:** Slight upward translation (`-translate-y-1`) and shadow-intensity increase on cards.
-- **Snappiness:** Keep animations fast (150ms-200ms) to ensure it feels like a native tool.
+- **Hover States:** Instead of shadows increasing, cards and list items receive a very faint gray background tint (`hover:bg-gray-50`) on hover.
+- **Transitions:** Fast, snappy `ease-in-out` `duration-150` for color and background shifts.
+- **Focus States:** Distinct indigo focus rings (`ring-indigo-500`) on inputs and textareas for accessibility.
