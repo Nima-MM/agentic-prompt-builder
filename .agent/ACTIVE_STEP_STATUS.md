@@ -2,101 +2,59 @@
 
 ## Current Milestone
 
-Step 3: Decoupled_Compiler (Logic Worker)
+Emergency Schema & Deps Recovery (DB Manager & DevOps Worker)
 
 ## Status
 
-- Created `src/utils/compiler.ts` as a pure TypeScript utility.
-- Implemented `compilePrompt` function handling 'markdown', 'xml', and 'hybrid' modes exactly as specified in the PRD and MVP Spec.
-- Zero-latency client-side processing prepared for the UI.
+- `zustand`, `lucide-react`, `clsx`, `tailwind-merge`, `class-variance-authority`, `jest`, and `playwright` correctly installed via DevOps Worker (`package.json` verified by QA).
+- UI Scaffolded with `npx shadcn@latest init` via DevOps Worker.
+- `schema.prisma` successfully rewritten based on PRD core state by DB Manager (using valid Prisma 7 syntax).
+- Database migration applied cleanly (`db_manager_schema_recovery_v3`).
 
 ## Blockers / Fixes Encountered
 
-- Docker root permissions on `src` folder caused a permission denied error when initializing the directory. Fixed by applying standard node user permissions via Docker.
+- An audit alert detected that `schema.prisma` had been incorrectly cleared/overwritten and packages were missing.
+- The Boss Agent correctly adjusted its delegation strategy to strictly use the DB Manager for schema writing, enforcing the rules.
+- Prisma schema permission and syntax issues (Prisma 7 deprecated datasource url) were resolved.
 
 ## Context Injection Confirmation
 
-**I hereby expressly confirm that for all future worker delegations, I will inject the required context by commanding the worker to first read `docs/requirements/PRD.md`, their specific `.agent/rules/<NAME>_INSTRUCTIONS.md`, and this `.agent/STATE_OF_THE_UNION.md` file before generating any code.**
+**I hereby expressly confirm that for all future worker delegations, I will inject the required context by commanding the worker to first read `docs/requirements/PRD.md`, their specific `.agent/rules/<NAME>_INSTRUCTIONS.md`, and this `.agent/ACTIVE_STEP_STATUS.md` file before generating any code.**
 
 ## Code Dump (Critical Files Modified)
 
-### `src/utils/compiler.ts`
+### `prisma/schema.prisma`
 
-```typescript
-export interface PromptBlock {
-  id: string;
-  type: string;
-  content: string;
-  isActive: boolean;
-  orderIndex: number;
+```prisma
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
-export type CompileMode = "markdown" | "xml" | "hybrid";
-
-/**
- * Escapes characters for pure XML mode.
- */
-function escapeXml(unsafe: string): string {
-  return unsafe.replace(/[<>&'"]/g, (c) => {
-    switch (c) {
-      case "<":
-        return "&lt;";
-      case ">":
-        return "&gt;";
-      case "&":
-        return "&amp;";
-      case "'":
-        return "&apos;";
-      case '"':
-        return "&quot;";
-      default:
-        return c;
-    }
-  });
+datasource db {
+  provider = "postgresql"
 }
 
-/**
- * Compiles a list of PromptBlocks into a single string based on the chosen mode.
- * Implements NFR-2.1 Zero-Latency pure client-side utility logic.
- */
-export function compilePrompt(
-  blocks: PromptBlock[],
-  mode: CompileMode,
-): string {
-  // Sort and filter active blocks
-  const activeBlocks = blocks
-    .filter((b) => b.isActive)
-    .sort((a, b) => a.orderIndex - b.orderIndex);
+model Prompt {
+  id        String        @id @default(uuid())
+  title     String        @default("Untitled Prompt")
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  blocks    PromptBlock[]
+}
 
-  switch (mode) {
-    case "markdown":
-      return activeBlocks
-        .map((b) => {
-          const typeUpper = b.type.toUpperCase();
-          return `## ${typeUpper}\n\n${b.content}`;
-        })
-        .join("\n\n---\n\n");
+model PromptBlock {
+  id         String   @id @default(uuid())
+  promptId   String
+  orderIndex Int
+  type       String
+  content    String
+  isActive   Boolean  @default(true)
+  prompt     Prompt   @relation(fields: [promptId], references: [id], onDelete: Cascade)
 
-    case "xml":
-      return activeBlocks
-        .map((b) => {
-          const typeLower = b.type.toLowerCase().replace(/[^a-z0-9_-]/g, "_");
-          const escapedContent = escapeXml(b.content);
-          return `<${typeLower}>\n${escapedContent}\n</${typeLower}>`;
-        })
-        .join("\n\n");
-
-    case "hybrid":
-      return activeBlocks
-        .map((b) => {
-          const typeLower = b.type.toLowerCase().replace(/[^a-z0-9_-]/g, "_");
-          // In hybrid mode, XML tags specify structure, but content remains raw (e.g. Markdown)
-          return `<${typeLower}>\n${b.content}\n</${typeLower}>`;
-        })
-        .join("\n\n");
-
-    default:
-      return "";
-  }
+  @@index([promptId, orderIndex])
 }
 ```
